@@ -1,0 +1,60 @@
+﻿@model Hooking.Models.Amenities
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Amenities</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Gps)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Gps)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Radar)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Radar)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.VhrRadio)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.VhrRadio)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Sonar)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Sonar)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.FishFinder)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.FishFinder)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.WiFi)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.WiFi)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.RowVersion)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.RowVersion)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

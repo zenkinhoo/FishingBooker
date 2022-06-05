@@ -1,0 +1,65 @@
+﻿@page
+@model Hooking.Areas.Identity.Pages.Account.Manage.CottagesReservationsModel
+@{
+    ViewData["Title"] = "Istorija rezervacija";
+    ViewData["ActivePage"] = ManageNavPages.MyCottageReservations;
+}
+@{
+    List<string> cottageNames = (List<string>)ViewData["CottageNames"];
+    var index = 0;
+}
+
+<h4>Pregled rezervacija</h4>
+<a href="@Url.Action("CottagesForReservation", "Cottages")">Napravi novu rezervaciju</a>
+<table class="table">
+    <thead>
+        <tr>
+
+            <th>
+                Naziv vikendice
+            </th>
+            <th>
+                Od
+            </th>
+            <th>
+                Do
+            </th>
+            <th>
+                Cena
+            </th>
+            <th>
+                Broj osoba
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.cottageReservations)
+        {
+        <tr>
+            <th>
+                @cottageNames[index]
+            </th>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaxPersonCount)
+            </td>
+            <td>
+                <a href="@Url.Action("Details", "CottageReservations", new { Id = @item.Id })">Prikaži još</a>
+            </td>
+            @{
+                index++;
+            }
+        </tr>
+        }
+    </tbody>
+</table>

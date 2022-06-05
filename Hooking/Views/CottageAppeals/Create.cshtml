@@ -1,0 +1,62 @@
+﻿@model Hooking.Models.CottageAppeal
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+@{
+    Cottage ctg = (Cottage)ViewData["Cottage"];
+    UserDetails ctgOwner = (UserDetails)ViewData["CottageOwner"];
+
+}
+
+<h4>Zalba na vikendicu i vlasnika vikendice</h4>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            Naziv vikendice
+        </dt>
+        <dd class="col-sm-10">
+            @ctg.Name
+        </dd>
+        <dt class="col-sm-2">
+            Ime vlasnika 
+        </dt>
+        <dd class="col-sm-10">
+            @ctgOwner.FirstName
+        </dd>
+        <dt class="col-sm-2">
+            Prezime vlasnika 
+        </dt>
+        <dd class="col-sm-10">
+            @ctgOwner.LastName
+        </dd>
+    </dl>
+</div>
+        <hr />
+        <div class="row">
+            <div class="col-md-4">
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="form-group">
+                        <label asp-for="AppealContent" class="control-label"></label>
+                        <input asp-for="AppealContent" class="form-control" />
+                        <span asp-validation-for="AppealContent" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Potvrdi" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div>
+            <a href='javascript:history.go(-1)'>Nazad</a>
+        </div>
+
+        @section Scripts {
+            @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+        }

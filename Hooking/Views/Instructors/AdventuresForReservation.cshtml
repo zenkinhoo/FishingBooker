@@ -1,0 +1,131 @@
+﻿@model Hooking.Models.Instructor
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> _signInManager
+
+
+@{
+    ViewData["Title"] = "Adventures For Reservation";
+    var userInstructor = (UserDetails)ViewData["UserInstructor"];
+    List<Adventure> instructorAdventures = (List<Adventure>)ViewData["InstructorsAdventures"];
+    DateTime StartDate = (DateTime)ViewData["StartDate"];
+    DateTime EndDate = (DateTime)ViewData["EndDate"];
+
+
+}
+
+
+
+<div>
+    <h4>Instructor</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            Ime i prezime
+        </dt>
+        <dd class="col-sm-10">
+            @userInstructor.FirstName @userInstructor.LastName
+        </dd>
+        <dt class="col-sm-2">
+            Adresa
+        </dt>
+        <dd class="col-sm-10">
+            @userInstructor.Address
+        </dd>
+        <dt class="col-sm-2">
+            Grad
+        </dt>
+        <dd class="col-sm-10">
+            @userInstructor.City
+        </dd>
+        <dt class="col-sm-2">
+            Drzava
+        </dt>
+        <dd class="col-sm-10">
+            @userInstructor.Country
+        </dd>
+        <dt class="col-sm-2">
+            Prosecna ocena
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.AverageGrade)
+        </dd>
+        <dt class="col-sm-2">
+            Zbirna ocena
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.GradeCount)
+        </dd>
+        <dt class="col-sm-2">
+            Biografija
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Biography)
+        </dd>
+        <dd class="col-sm-12">
+            <h3>Avanture</h3>
+        </dd>
+        @foreach (var item in instructorAdventures)
+        {
+            <dt class="col-sm-2">
+                Naziv Avanture
+            </dt>
+            <dd class="col-sm-10">
+                @item.Name
+            </dd>
+            <dt class="col-sm-2">
+                Adresa Avanture
+            </dt>
+            <dd class="col-sm-10">
+                @item.Address
+            </dd>
+            <dt class="col-sm-2">
+                Grad
+            </dt>
+            <dd class="col-sm-10">
+                @item.City
+            </dd>
+            <dt class="col-sm-2">
+                Drzava
+            </dt>
+            <dd class="col-sm-10">
+                @item.Country
+            </dd>
+            <dt class="col-sm-2">
+                Opis avanture
+            </dt>
+            <dd class="col-sm-10">
+                @item.Description
+            </dd>
+            <dt class="col-sm-2">
+                Prosecna ocena
+            </dt>
+            <dd class="col-sm-10">
+                @item.AverageGrade
+            </dd>
+            <dt class="col-sm-2">
+                <a asp-action="Create" asp-controller="AdventureFavorites" asp-route-id="@item.Id">Pretplati se</a>
+            </dt>
+            <dd class="col-sm-10">
+
+            </dd>
+            @if (_signInManager.IsSignedIn(User))
+            {
+                @if (User.IsInRole("Korisnik"))
+                {
+                    <dt class="col-sm-2">
+                        <a href="@Url.Action("FinishAdventureReservation", "Adventures", new { adventureId = @item.Id, StartDate=StartDate, EndDate=EndDate })">Rezervisi</a>
+
+                    </dt>
+                    <dd class="col-sm-10">
+
+                    </dd>
+                }
+            }
+        }
+
+
+    </dl>
+</div>
+<div>
+    <a asp-action="Index">Nazad</a>
+</div>

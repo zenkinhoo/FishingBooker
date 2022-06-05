@@ -1,0 +1,42 @@
+﻿@model IEnumerable<Hooking.Models.RegistrationRequest>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Zahtevi za registraciju</h1>
+<br/>
+
+<a asp-controller="UserDeleteRequests" asp-action="Index">Zahtevi za brisanje naloga</a>
+<br/>
+<br/>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                <a asp-action="Approve" asp-route-id="@item.Id">Odobri</a> |
+                <a asp-action="Reject" asp-route-id="@item.Id">Odbij</a> 
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

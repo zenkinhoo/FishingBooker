@@ -1,0 +1,326 @@
+﻿@model Hooking.Models.Boat
+
+@{
+    ViewData["Title"] = "Details";
+
+}
+@{
+    var boatOwner = (UserDetails)ViewData["BoatOwner"];
+    var fullAddress = (string)ViewData["FullAddress"];
+    var cancelationPolicy = (CancelationPolicy)ViewData["CancelationPolicy"];
+    var fishingEquipment = (FishingEquipment)ViewData["FishingEquipment"];
+    List<BoatImage> boatImages = (List<BoatImage>)ViewData["BoatImages"];
+    var amenities = (Amenities)ViewData["Amenities"];
+}
+
+<h4>Prikaz informacija o brodu</h4>
+
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false" type="text/javascript"></script>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Type)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Type)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Length)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Length)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Capacity)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Capacity)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EngineNumber)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EngineNumber)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EnginePower)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EnginePower)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.MaxSpeed)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.MaxSpeed)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.City)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.City)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Country)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Country)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.AverageGrade)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.AverageGrade)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.RegularPrice)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.RegularPrice)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.WeekendPrice)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.WeekendPrice)
+        </dd>
+        <dt class="col-sm-2">
+            Ime i prezime vlasnika
+        </dt>
+        <dd class="col-sm-10">
+            @boatOwner.FirstName @boatOwner.LastName
+        </dd>
+
+    </dl>
+</div>
+<hr />
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Izmeni informacije o brodu</a> |
+    <a href="@Url.Action("Index","BoatNotAvailablePeriods",new { id = @Model.Id})">Kalendar dostupnosti</a>
+</div>
+<hr />
+<h4>Lokacija</h4>
+<div name="GoogleMap">
+
+    <div class="mapouter">
+        <div class="gmap_canvas">
+            <iframe width="800" height="500" id="gmap_canvas" src="https://maps.google.com/maps?q=@fullAddress&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><a href="https://www.online-timer.net">timer</a><br>
+            <style>
+                .mapouter {
+                    position: relative;
+                    text-align: right;
+                    height: 500px;
+                    width: 800px;
+                }
+            </style><a href="https://www.embedgooglemap.net">embedded google maps in website</a>
+            <style>
+                .gmap_canvas {
+                    overflow: hidden;
+                    background: none !important;
+                    height: 500px;
+                    width: 800px;
+                }
+            </style>
+        </div>
+    </div>
+</div>
+<hr />
+<div>
+    <h4>Uslovi otkazivanja</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            Besplatno otkazivanje do (broj dana)
+        </dt>
+        <dd class="col-sm-10">
+            @cancelationPolicy.FreeUntil
+        </dd>
+        <dt class="col-sm-2">
+            Procenat od uplate koji se zadržava u slučaju otkaza
+        </dt>
+        <dd class="col-sm-10">
+            @cancelationPolicy.PenaltyPercentage
+        </dd>
+    </dl>
+</div>
+<hr />
+<div>
+    <a asp-action="Edit" asp-controller="CancelationPolicies" asp-route-id="@cancelationPolicy.Id">Izmeni pravila otkazivanja</a>
+</div>
+<hr />
+<div>
+    <h4>Oprema za pecanje</h4>
+    <hr />
+    <dl class="row">
+
+        @if (fishingEquipment.Lures)
+        {
+            <dt class="col-sm-2">
+                Mamci
+            </dt>
+            <dd class="col-sm-10">
+                <span style="font-family: wingdings; font-size: 100%; color:green">&#10004;</span>
+            </dd>
+        }
+        @if (fishingEquipment.LiveBite)
+        {
+            <dt class="col-sm-2">
+                Živi mamci
+            </dt>
+            <dd class="col-sm-10">
+                <span style="font-family: wingdings; font-size: 100%; color:green">&#10004;</span>
+            </dd>
+        }
+        @if (fishingEquipment.RodsReelsTackle)
+        {
+            <dt class="col-sm-2">
+                Štapovi za pecanje
+            </dt>
+            <dd class="col-sm-10">
+                <span style="font-family: wingdings; font-size: 100%; color:green">&#10004;</span>
+            </dd>
+        }
+        @if (fishingEquipment.FlyFishingGear)
+        {
+            <dt class="col-sm-2">
+                Oprema za fly-fishing
+            </dt>
+            <dd class="col-sm-10">
+                <span style="font-family: wingdings; font-size: 100%; color:green">&#10004;</span>
+            </dd>
+        }
+</div>
+<hr />
+<div>
+    <a asp-action="Edit" asp-controller="FishingEquipments" asp-route-id="@fishingEquipment.Id">Izmeni opremu za pecanje</a>
+</div>
+<hr />
+<div>
+    <h4>Oprema</h4>
+    <hr />
+    <dl class="row">
+
+        @if (amenities.Radar)
+        {
+            <dt class="col-sm-2">
+                Radar
+            </dt>
+            <dd class="col-sm-10">
+                <span style="font-family: wingdings; font-size: 100%; color:green">&#10004;</span>
+            </dd>
+        }
+        @if (amenities.Sonar)
+        {
+            <dt class="col-sm-2">
+                Sonar
+            </dt>
+            <dd class="col-sm-10">
+                <span style="font-family: wingdings; font-size: 100%; color:green">&#10004;</span>
+            </dd>
+        }
+        @if (amenities.Gps)
+        {
+            <dt class="col-sm-2">
+                GPS
+            </dt>
+            <dd class="col-sm-10">
+                <span style="font-family: wingdings; font-size: 100%; color:green">&#10004;</span>
+            </dd>
+        }
+        @if (amenities.FishFinder)
+        {
+            <dt class="col-sm-2">
+                Fish-finder
+            </dt>
+            <dd class="col-sm-10">
+                <span style="font-family: wingdings; font-size: 100%; color:green">&#10004;</span>
+            </dd>
+        }
+        @if (amenities.VhrRadio)
+        {
+            <dt class="col-sm-2">
+                VHR Radio
+            </dt>
+            <dd class="col-sm-10">
+                <span style="font-family: wingdings; font-size: 100%; color:green">&#10004;</span>
+            </dd>
+        }
+        @if (amenities.WiFi)
+        {
+            <dt class="col-sm-2">
+                WiFi
+            </dt>
+            <dd class="col-sm-10">
+                <span style="font-family: wingdings; font-size: 100%; color:green">&#10004;</span>
+            </dd>
+        }
+</div>
+<hr />
+<div>
+    <a asp-action="Edit" asp-controller="Amenities" asp-route-id="@amenities.Id">Izmeni opremu</a>
+</div>
+<hr />
+<div class="container">
+
+    <div class="row">
+
+        @foreach (var item in boatImages)
+        {
+            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+
+                <a class="thumbnail" href="@item.ImageUrl">
+                    <img class="img-responsive" src="@item.ImageUrl" style="height: 100%;width: 100%" alt="">
+                </a>
+
+
+            </div>
+
+
+        }
+    </div>
+    <br />
+    <div class="row">
+        @using (Html.BeginForm("UploadImage", "Boats", new { id = @Model.Id }, FormMethod.Post, true, new { enctype = "multipart/form-data" }))
+        {
+            <div class="panel panel-warning">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Dodaj novu sliku</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-4 col-md-offset-4">
+                            <input id="Otpremi" type="file" name="file" class="btn btn-primary" />
+                            <br />
+                            <br />
+                            <input type="submit" class="btn btn-primary" value="Sačuvaj" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+
+</div>
+<hr />

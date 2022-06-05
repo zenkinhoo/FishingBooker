@@ -1,0 +1,82 @@
+﻿@page
+@model Hooking.Areas.Identity.Pages.Account.Manage.CottageReservationsHistoryModel
+@using Hooking.Models;
+@{
+    ViewData["Title"] = "Istorija rezervacija vikendica";
+    ViewData["ActivePage"] = ManageNavPages.CottageReservationsHistory;
+
+}
+@{
+    List<Cottage> cottages = (List<Cottage>)ViewData["Cottage"];
+    int i = 0;
+}
+
+<h4>@ViewData["Title"]</h4>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Naziv vikendice
+            </th>
+            <th>
+                <a asp-page="./CottageReservationsHistory" asp-route-sortOrder="StartDate">
+                    Od
+                </a>
+            </th>
+            <th>
+                <a asp-page="./CottageReservationsHistory" asp-route-sortOrder="EndDate">
+                    Do
+                </a>
+            </th>
+            <th>
+                <a asp-page="./CottageReservationsHistory" asp-route-sortOrder="Price">
+                    Cena
+                </a>
+            </th>
+            <th>
+                Max broj osoba
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model.myCottageReservations)
+        {
+            @if (DateTime.Compare(item.StartDate, DateTime.Now) < 0)
+            {
+        <tr>
+            <td>
+                @cottages[i].Name
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaxPersonCount)
+            </td>
+
+            <td>
+                <a href="@Url.Action("Create", "CottageAppeals", new { Id = @item.CottageId , cottageOwnerId = @cottages[i].CottageOwnerId })">Prilozi zalbu</a>
+
+
+            </td>
+            <td>
+            <a href="@Url.Action("Create", "CottageReviews", new { Id = @item.CottageId, cottageOwnerId = @cottages[i].CottageOwnerId })">Oceni</a>
+                </td>
+
+
+        </tr>
+
+            }
+
+            i++;
+        }
+    </tbody>
+</table>
+

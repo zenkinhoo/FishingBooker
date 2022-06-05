@@ -1,0 +1,67 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Profil";
+    ViewData["ActivePage"] = ManageNavPages.Index;
+}
+
+<h4>@ViewData["Title"]</h4>
+<partial name="_StatusMessage" model="Model.StatusMessage" />
+<div class="row">
+    <div class="col-md-6">
+        <form id="profile-form" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Username"></label>
+                <input id="profile-username" asp-for="Username" class="form-control" disabled />
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.PhoneNumber"></label>
+                <input id="profile-phonenumber" asp-for="Input.PhoneNumber" class="form-control" />
+                <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.FirstName"></label>
+                <input id="profile-firstname" asp-for="Input.FirstName" class="form-control" />
+                <span asp-validation-for="Input.FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.LastName"></label>
+                <input id="profile-lastname" asp-for="Input.LastName" class="form-control" />
+                <span asp-validation-for="Input.LastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.Address"></label>
+                <input id="profile-address" asp-for="Input.Address" class="form-control" />
+                <span asp-validation-for="Input.Address" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.City"></label>
+                <input id="profile-city" asp-for="Input.City" class="form-control" />
+                <span asp-validation-for="Input.City" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.Country"></label>
+                <input id="profile-country" asp-for="Input.Country" class="form-control" />
+                <span asp-validation-for="Input.Country" class="text-danger"></span>
+            </div>
+            @if (User.IsInRole("Korisnik"))
+            {
+                <div class="form-group">
+                    <label id="profile-penaltycount" asp-for="Input.PenaltyCount"></label>
+                    <input asp-for="Input.PenaltyCount" class="form-control" disabled />
+                </div>
+            }
+
+            <button id="update-profile-button" type="submit" class="btn btn-primary">Potvrdi</button>
+
+
+        </form>
+    </div>
+    
+
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

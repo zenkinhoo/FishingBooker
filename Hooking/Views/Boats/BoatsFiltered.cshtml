@@ -1,0 +1,138 @@
+﻿@using Microsoft.AspNetCore.Identity
+@model IEnumerable<Hooking.Models.Boat>
+@inject SignInManager<IdentityUser> _signInManager
+
+@{
+    ViewData["Title"] = "Index";
+    DateTime startDate = (DateTime)ViewData["StartDate"];
+    DateTime endDate = (DateTime)ViewData["EndDate"];
+    int PersonCount = (int)ViewData["PersonCount"];
+}
+
+
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th data-defaultsort="asc">
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["Name"]">@Html.DisplayNameFor(model => model.Name)</a>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Length)
+            </th>
+            <th data-defaultsort="asc">
+                @Html.DisplayNameFor(model => model.Capacity)
+            </th>
+            <th hidden>
+                @Html.DisplayNameFor(model => model.EngineNumber)
+            </th>
+            <th hidden>
+                @Html.DisplayNameFor(model => model.EnginePower)
+            </th>
+            <th hidden>
+                @Html.DisplayNameFor(model => model.MaxSpeed)
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["Address"]">@Html.DisplayNameFor(model => model.Address)</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["City"]">@Html.DisplayNameFor(model => model.City)</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["Country"]">@Html.DisplayNameFor(model => model.Country)</a>
+            </th>
+            <th hidden>
+                @Html.DisplayNameFor(model => model.CancelationPolicyId)
+            </th>
+            <th hidden>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th data-defaultsort="asc">
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["AverageGrade"]">@Html.DisplayNameFor(model => model.AverageGrade)</a>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RegularPrice)
+            </th>
+            <th hidden>
+                @Html.DisplayNameFor(model => model.WeekendPrice)
+            </th>
+            <th hidden>
+                @Html.DisplayNameFor(model => model.RowVersion)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Type)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Length)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Capacity)
+                </td>
+                <td hidden>
+                    @Html.DisplayFor(modelItem => item.EngineNumber)
+                </td>
+                <td hidden>
+                    @Html.DisplayFor(modelItem => item.EnginePower)
+                </td>
+                <td hidden>
+                    @Html.DisplayFor(modelItem => item.MaxSpeed)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.City)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Country)
+                </td>
+                <td hidden>
+                    @Html.DisplayFor(modelItem => item.CancelationPolicyId)
+                </td>
+                <td hidden>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AverageGrade)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RegularPrice)
+                </td>
+                <td hidden>
+                    @Html.DisplayFor(modelItem => item.WeekendPrice)
+                </td>
+                <td hidden>
+                    @Html.DisplayFor(modelItem => item.RowVersion)
+                </td>
+                <td>
+
+                    <a href="@Url.Action("FinishBoatReservation", "Boats", new { Id = @item.Id, StartDate=startDate, EndDate=endDate, PersonCount = PersonCount })">Rezervisi</a>
+
+                
+
+                    @if (_signInManager.IsSignedIn(User))
+                    {
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <a asp-action="Delete" asp-route-id="item.Id"> | Obriši</a>
+                        }
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

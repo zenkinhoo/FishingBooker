@@ -1,0 +1,48 @@
+﻿@model Hooking.Models.AdventureRules
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>AdventureRules</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ChildFriendly)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ChildFriendly)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.YouKeepCatch)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.YouKeepCatch)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CatchAndReleaseAllowed)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CatchAndReleaseAllowed)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CabinSmoking)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CabinSmoking)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.RowVersion)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.RowVersion)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

@@ -1,0 +1,96 @@
+﻿@model IEnumerable<Hooking.Models.FilteredBoats>
+@inject SignInManager<IdentityUser> _signInManager
+@using Microsoft.AspNetCore.Identity;
+
+
+@{
+    ViewData["Title"] = "Index";
+    DateTime startDate = (DateTime)ViewData["StartDate"];
+    DateTime endDate = (DateTime)ViewData["EndDate"];
+    int MaxPersonCount = (int)ViewData["PersonCount"];
+    double price = (double)ViewData["Price"];
+    double AverageGrade = (double)ViewData["AverageGrade"];
+    string City = (string)ViewData["City"];
+}
+
+<h1>Filtrirani brodovi</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+
+            <th>
+                <a href="@Url.Action("Index", "FilteredBoats", new {StartDate = startDate, EndDate = endDate,  price = price, City = City,  AverageGrade = AverageGrade,  MaxPersonCount = MaxPersonCount, sortOrder="Name" })">@Html.DisplayNameFor(model => model.Name)</a>
+            </th>
+            <th>
+                <a href="@Url.Action("Index", "FilteredBoats", new {StartDate = startDate, EndDate = endDate,  price = price, City = City,  AverageGrade = AverageGrade,  MaxPersonCount = MaxPersonCount, sortOrder="Address" })">@Html.DisplayNameFor(model => model.Address)</a>
+            </th>
+            <th>
+                <a href="@Url.Action("Index", "FilteredBoats", new {StartDate = startDate, EndDate = endDate,  price = price, City = City,  AverageGrade = AverageGrade,  MaxPersonCount = MaxPersonCount, sortOrder="City" })">@Html.DisplayNameFor(model => model.City)</a>
+            </th>
+            <th>
+                <a href="@Url.Action("Index", "FilteredBoats", new {StartDate = startDate, EndDate = endDate,  price = price, City = City,  AverageGrade = AverageGrade,  MaxPersonCount = MaxPersonCount, sortOrder="Price" })">@Html.DisplayNameFor(model => model.Price)</a>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Length)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MaxSpeed)
+            </th>
+            <th>
+                <a href="@Url.Action("Index", "FilteredBoats", new {StartDate = startDate, EndDate = endDate,  price = price, City = City,  AverageGrade = AverageGrade,  MaxPersonCount = MaxPersonCount, sortOrder="AverageGrade" })">@Html.DisplayNameFor(model => model.AverageGrade)</a>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GradeCount)
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.City)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Length)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaxSpeed)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AverageGrade)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GradeCount)
+                </td>
+                <td>
+
+                    <a href="@Url.Action("FinishBoatReservation", "Boats", new { Id = @item.BoatId, StartDate=startDate, EndDate=endDate, MaxPersonCount = MaxPersonCount })">Rezervisi</a>
+
+                    @if (_signInManager.IsSignedIn(User))
+                    {
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <a asp-action="Delete" asp-controller="Boats" asp-route-id="@item.BoatId"> | Obriši</a>
+                        }
+                    }
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

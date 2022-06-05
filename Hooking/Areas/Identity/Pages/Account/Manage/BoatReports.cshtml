@@ -1,0 +1,12 @@
+﻿@page
+@model Hooking.Areas.Identity.Pages.Account.Manage.BoatReportsModel
+@{
+    var totalIncome = (double)ViewData["TotalIncome"];
+    var totalReservations = (int)ViewData["TotalReservations"];
+}
+<h4>Izveštaj o poslovanju</h4>
+
+<p>Ukupna zarada : @totalIncome</p>
+<p>Broj rezervacija : @totalReservations</p>
+
+<button style="height:50px;width:200px" type="button" onclick="location.href='@Url.Page("/Account/Manage/BoatReportForm", new { area = "Identity" })'" class="btn btn-primary">Izveštaj za brodove</button>

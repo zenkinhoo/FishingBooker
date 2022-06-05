@@ -1,0 +1,72 @@
+﻿@model IEnumerable<Hooking.Models.FilteredInstructors>
+@inject SignInManager<IdentityUser> _signInManager
+@using Microsoft.AspNetCore.Identity;
+@{
+    ViewData["Title"] = "Index";
+    DateTime startDate = (DateTime)ViewData["StartDate"];
+    DateTime endDate = (DateTime)ViewData["EndDate"];
+    int MaxPersonCount = (int)ViewData["MaxPersonCount"];
+    double price = (double)ViewData["Price"];
+    double AverageGrade = (double)ViewData["AverageGrade"];
+    string City = (string)ViewData["City"];
+}
+
+<h1>Filtrirani instruktori</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a href="@Url.Action("Index", "FilteredInstructors", new {StartDate = startDate, EndDate = endDate,  price = price, City = City,  AverageGrade = AverageGrade,  MaxPersonCount = MaxPersonCount, sortOrder="FirstName" })">@Html.DisplayNameFor(model => model.FirstName)</a>
+            </th>
+            <th>
+                <a href="@Url.Action("Index", "FilteredInstructors", new {StartDate = startDate, EndDate = endDate,  price = price, City = City,  AverageGrade = AverageGrade,  MaxPersonCount = MaxPersonCount, sortOrder="LastName" })">@Html.DisplayNameFor(model => model.LastName)</a>
+            </th>
+            <th>
+                <a href="@Url.Action("Index", "FilteredInstructors", new {StartDate = startDate, EndDate = endDate,  price = price, City = City,  AverageGrade = AverageGrade,  MaxPersonCount = MaxPersonCount, sortOrder="Address" })">@Html.DisplayNameFor(model => model.Address)</a>
+            </th>
+            <th>
+                <a href="@Url.Action("Index", "FilteredInstructors", new {StartDate = startDate, EndDate = endDate,  price = price, City = City,  AverageGrade = AverageGrade,  MaxPersonCount = MaxPersonCount, sortOrder="City" })">@Html.DisplayNameFor(model => model.City)</a>
+            </th>
+            <th>
+                <a href="@Url.Action("Index", "FilteredInstructors", new {StartDate = startDate, EndDate = endDate,  price = price, City = City,  AverageGrade = AverageGrade,  MaxPersonCount = MaxPersonCount, sortOrder="AverageGrade" })">@Html.DisplayNameFor(model => model.AverageGrade)</a>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GradeCount)
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.City)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AverageGrade)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GradeCount)
+                </td>
+                <td>
+                    <a href="@Url.Action("AdventuresForReservation", "Instructors", new { Id = @item.instructorId,StartDate=startDate,EndDate=endDate,price=price,City=City,AverageGrade=AverageGrade,MaxPersonCount=MaxPersonCount })">Nastavi na rezervaciju</a>
+
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>

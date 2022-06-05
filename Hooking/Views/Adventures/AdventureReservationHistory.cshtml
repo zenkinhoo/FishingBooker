@@ -1,0 +1,66 @@
+﻿@model IEnumerable<Hooking.Models.DTO.AdventureReservationDTO>
+
+@{
+    ViewData["Title"] = "Istorija rezervacija";
+}
+
+<h1>Rezervacije</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.AdventureName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Duration)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StartDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserDetailsFirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserDetailsLastName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AdventureName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Duration)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserDetailsFirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserDetailsLastName)
+                </td>
+                <td>
+                    @if (!item.IsReviewed)
+                    {
+                        <a href="@Url.Action("Create", "AdventureReservationReviews", new { Id = @item.AdventureReservationId })">Recenzija</a>
+                    }
+                    <a asp-controller="UserDetails" asp-action="Details" asp-route-id="@item.UserDetailsId">Pregledaj profil</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

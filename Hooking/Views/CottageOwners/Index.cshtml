@@ -1,0 +1,50 @@
+﻿@model IEnumerable<Hooking.Models.CottageOwner>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Pregled profila vlasnika vikendica</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th hidden>
+                @Html.DisplayNameFor(model => model.UserDetailsId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AverageGrade)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GradeCount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RowVersion)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td hidden>
+                @Html.DisplayFor(modelItem => item.UserDetailsId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AverageGrade)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GradeCount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RowVersion)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Izmena profila</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Prikaži još</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Ukloni profil</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

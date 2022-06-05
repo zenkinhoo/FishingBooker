@@ -1,0 +1,55 @@
+﻿@page
+@model Hooking.Areas.Identity.Pages.Account.Manage.BoatReportFormModel
+@{
+    List<string> boatNames = (List<string>)ViewData["BoatNames"];
+    List<double> boatIncomes = (List<double>)ViewData["BoatIncomes"];
+    List<int> boatNumOfReservations = (List<int>)ViewData["BoatNumOfReservations"];
+    List<double> averageGrades = (List<double>)ViewData["AverageGrades"];
+    int totalNumOfBoats = (int)ViewData["TotalNumOfBoats"];
+    int index = 0;
+}
+<h4>Izveštaj o poslovanju svakog broda</h4>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Naziv broda
+            </th>
+            <th>
+                Prosečna ocena
+            </th>
+            <th>
+                Ukupna zarada
+            </th>
+            <th>
+                Ukupan broj rezervacija
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (int i = 0; i < totalNumOfBoats; i++)
+        {
+        <tr>
+            <td>
+                @boatNames[index]
+            </td>
+            <td>
+                @averageGrades[index]
+            </td>
+            <td>
+                @boatIncomes[index]
+            </td>
+            <td>
+                @boatNumOfReservations[index]
+            </td>
+
+            @{
+                index++;
+            }
+        </tr>
+        }
+    </tbody>
+</table>
+

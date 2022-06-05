@@ -1,0 +1,77 @@
+﻿@page
+@model Hooking.Areas.Identity.Pages.Account.Manage.MyBoatReservationsModel
+@using Hooking.Models;
+@inject SignInManager<IdentityUser> _signInManager
+
+
+@{
+    ViewData["Title"] = "Istorija rezervacija brodova";
+    ViewData["ActivePage"] = ManageNavPages.MyBoatReservations;
+}
+@{
+    List<Boat> boats = (List<Boat>)ViewData["Boat"];
+    int i = 0;
+}
+<h4>Moje rezervacije brodova</h4>
+@if (_signInManager.IsSignedIn(User))
+{
+    @if (!User.IsInRole("Korisnik"))
+    {
+        <a href="@Url.Action("BoatsForReservation", "Boats")">Napravi novu rezervaciju</a>
+    }
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Naziv broda
+            </th>
+            <th>
+                Od
+            </th>
+            <th>
+                Do
+            </th>
+            <th>
+                Cena
+            </th>
+            <th>
+                Max broj osoba
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.myBoatReservations)
+        {
+            @if (DateTime.Compare(item.StartDate, DateTime.Now) > 0)
+            {
+                <tr>
+                    <td>
+                        @boats[i].Name
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StartDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EndDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PersonCount)
+                    </td>
+
+                    <td>
+                        <a href="@Url.Action("Details", "BoatReservations", new { Id = @item.Id })">Prikaži više</a>
+                        <a href="@Url.Action("Delete", "BoatReservations", new { Id = @item.Id })">Otkaži rezervaciju</a>
+                    </td>
+
+
+                </tr>
+
+            }
+            i++;
+        }
+    </tbody>
+</table>

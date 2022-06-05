@@ -1,0 +1,25 @@
+﻿@model Hooking.Models.BoatAppeal
+
+@{
+    ViewData["Title"] = "Odgovor";
+}
+<div class="row">
+    <div class="col-md-4">
+        <form asp-controller="BoatAppeals" asp-action="SubmitAnswer">
+            <div class="form-group">
+                <label class="control-label">Odgovor</label>
+                <textarea class="form-control" name="answer" rows="3" cols="20"></textarea>
+            </div>
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="UserEmail" />
+            <input type="hidden" asp-for="BoatId" />
+            <div class="form-group">
+                <input type="submit" value="Odgovori" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-controller="BoatAppeals" asp-action="Index">Nazad</a>
+</div>

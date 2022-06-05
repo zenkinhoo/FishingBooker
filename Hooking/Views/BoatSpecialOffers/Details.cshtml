@@ -1,0 +1,96 @@
+﻿@model Hooking.Models.BoatSpecialOffer
+
+@{
+    ViewData["Title"] = "Details";
+}
+@{ 
+    var boat = (Boat)ViewData["Boat"];
+}
+
+<h4>Specijalna ponuda</h4>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            Naziv broda
+        </dt>
+        <dd class="col-sm-10">
+            <a href="@Url.Action("Details","Boats",new { id = @boat.Id })">@boat.Name</a>
+        </dd>
+        <dt class="col-sm-2">
+            Država
+        </dt>
+        <dd class="col-sm-10">
+            @boat.Country
+        </dd>
+        <dt class="col-sm-2">
+            Grad
+        </dt>
+        <dd class="col-sm-10">
+            @boat.City
+        </dd>
+        <dt class="col-sm-2">
+            Adresa
+        </dt>
+        <dd class="col-sm-10">
+            @boat.Address
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.StartDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.StartDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EndDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EndDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ValidFrom)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ValidFrom)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ValidTo)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ValidTo)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.MaxPersonCount)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.MaxPersonCount)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.IsReserved)
+        </dt>
+        <dd class="col-sm-10">
+            @if (Model.IsReserved)
+            {
+                @Html.Raw("Da");
+            }
+            else
+            {
+                @Html.Raw("Ne");
+            }
+        </dd>
+    </dl>
+</div>
+

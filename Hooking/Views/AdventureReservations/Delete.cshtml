@@ -1,0 +1,36 @@
+﻿@model Hooking.Models.AdventureReservation
+
+@{
+    ViewData["Title"] = "Delete";
+
+
+}
+@{ 
+    AdventureRealisation adventureRealisation = (AdventureRealisation)ViewData["AdventureRealisation"];
+
+}
+
+@if ((adventureRealisation.StartDate - DateTime.Now).Days > 3)
+{
+    <h3>Jeste li sigurni da zelite da otkazete rezervaciju?</h3>
+    <div>
+
+
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="Id" />
+            <input type="submit" value="Otkazi" class="btn btn-danger" /> |
+            <a href='javascript:history.go(-1)'>Nazad</a>
+        </form>
+    </div>
+}
+else
+{
+<h3>Ne mozete otkazati rezervaciju 3 dana pred istu</h3>
+<div>
+
+    <form asp-action="Otkazi">
+        <a href='javascript:history.go(-1)'> Nazad </a>
+    </form>
+</div>
+}
+

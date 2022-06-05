@@ -1,0 +1,43 @@
+﻿@model Hooking.Models.CottageOwner
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Moj profil</h1>
+
+<div>
+    <h4>Vlasnik vikendice</h4>
+    <hr />
+    <a asp-action="ShowMyCottages" asp-controller="Cottages">Prikaži moje vikendice</a>
+    <dl class="row">
+        <dt class = "col-sm-2" hidden>
+            @Html.DisplayNameFor(model => model.UserDetailsId)
+        </dt>
+        <dd class = "col-sm-10" hidden>
+            @Html.DisplayFor(model => model.UserDetailsId)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.AverageGrade)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.AverageGrade)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.GradeCount)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.GradeCount)
+        </dd>
+        <dt class = "col-sm-2" hidden>
+            @Html.DisplayNameFor(model => model.RowVersion)
+        </dt>
+        <dd class = "col-sm-10" hidden>
+            @Html.DisplayFor(model => model.RowVersion)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Izmeni informacije</a> |
+</div>
+

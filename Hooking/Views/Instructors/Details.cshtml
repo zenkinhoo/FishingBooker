@@ -1,0 +1,142 @@
+﻿@model Hooking.Models.Instructor
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> _signInManager
+
+
+@{
+    ViewData["Title"] = "Details";
+    var userInstructor = (UserDetails)ViewData["UserInstructor"];
+    List<Adventure> instructorAdventures = (List<Adventure>)ViewData["InstructorsAdventures"];
+    var fullAddress = (string)ViewData["FullAddress"];
+
+}
+
+
+
+<div>
+    <h4>Instructor</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            Ime i prezime
+        </dt>
+        <dd class="col-sm-10">
+            @userInstructor.FirstName @userInstructor.LastName
+        </dd>
+        <dt class="col-sm-2">
+            Adresa
+        </dt>
+        <dd class="col-sm-10">
+            @userInstructor.Address
+        </dd>
+        <dt class="col-sm-2">
+            Grad
+        </dt>
+        <dd class="col-sm-10">
+            @userInstructor.City
+        </dd>
+        <dt class="col-sm-2">
+            Drzava
+        </dt>
+        <dd class="col-sm-10">
+            @userInstructor.Country
+        </dd>
+        <dt class="col-sm-2">
+            Prosecna ocena
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.AverageGrade)
+        </dd>
+        <dt class="col-sm-2">
+            Broj ocena
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.GradeCount)
+        </dd>
+        <dt class="col-sm-2">
+            Biografija
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Biography)
+        </dd>
+
+        <div name="GoogleMap">
+
+            <div class="mapouter">
+                <div class="gmap_canvas">
+                    <iframe width="800" height="500" id="gmap_canvas" src="https://maps.google.com/maps?q=@fullAddress&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><a href="https://www.online-timer.net">timer</a><br>
+                    <style>
+                        .mapouter {
+                            position: relative;
+                            text-align: right;
+                            height: 500px;
+                            width: 800px;
+                        }
+                    </style><a href="https://www.embedgooglemap.net">embedded google maps in website</a>
+                    <style>
+                        .gmap_canvas {
+                            overflow: hidden;
+                            background: none !important;
+                            height: 500px;
+                            width: 800px;
+                        }
+                    </style>
+                </div>
+            </div>
+        </div>
+        <dd class="col-sm-12">
+            <h3>Avanture</h3>
+        </dd>
+        @foreach (var item in instructorAdventures)
+        {
+            <dt class="col-sm-2">
+                Naziv Avanture
+            </dt>
+            <dd class="col-sm-10">
+                @item.Name
+            </dd>
+            <dt class="col-sm-2">
+                Adresa Avanture
+            </dt>
+            <dd class="col-sm-10">
+                @item.Address
+            </dd>
+            <dt class="col-sm-2">
+                Grad
+            </dt>
+            <dd class="col-sm-10">
+                @item.City
+            </dd>
+            <dt class="col-sm-2">
+                Drzava
+            </dt>
+            <dd class="col-sm-10">
+                @item.Country
+            </dd>
+            <dt class="col-sm-2">
+                Opis avanture
+            </dt>
+            <dd class="col-sm-10">
+                @item.Description
+            </dd>
+            <dt class="col-sm-2">
+                Prosecna ocena
+            </dt>
+            <dd class="col-sm-10">
+                @item.AverageGrade
+            </dd>
+            <dt class="col-sm-2">
+                <a asp-action="Create" asp-controller="AdventureFavorites" asp-route-id="@item.Id">Pretplati se</a>
+            </dt>
+            <dd class="col-sm-10">
+
+            </dd>
+
+        }
+
+
+    </dl>
+</div>
+<div>
+    <a asp-action="Index">Nazad</a>
+</div>

@@ -1,0 +1,159 @@
+﻿<title>@ViewData["Title"] - Column Chart</title>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<h1>Izveštaj</h1>
+<div style="vertical-align:middle; text-align: center; margin-bottom: 48px">
+
+    <b>
+        <label></label>
+    </b>
+</div>
+<div id="chart_divY"></div>
+<script type="text/javascript">
+    google.charts.load('current', {
+        packages: ['corechart', 'bar']
+    });
+    google.charts.setOnLoadCallback(LoadData);
+    function LoadData() {
+        $.ajax({
+            url: 'ColumnCharts/ChartYear',
+            dataType: "json",
+            type: "GET",
+            error: function (xhr, status, error) {
+                var err = eval("(" + xhr.responseText + ")");
+                toastr.error(err.message);
+            },
+            success: function (data) {
+                ChartYear(data);
+                return false;
+            }
+        });
+        return false;
+    }
+    function ChartYear(data) {
+        var dataArray = [
+            ['Period', 'Prihodi']
+        ];
+        $.each(data, function (i, item) {
+            dataArray.push([item.adventureName, item.income]);
+        });
+        var data = google.visualization.arrayToDataTable(dataArray);
+        var options = {
+            title: 'Godisnji prihodi',
+            chartArea: {
+                width: '50%'
+            },
+            colors: ['#b0120a', '#7b1fa2', '#ffab91', '#d95f02'],
+            hAxis: {
+                title: 'Godine',
+                minValue: 0
+            },
+            vAxis: {
+                title: 'Prihodi'
+            }
+        };
+        var chart = new google.visualization.ColumnChart(document.getElementById('chart_divY'));
+        chart.draw(data, options);
+        return false;
+    }
+</script>
+
+<div id="chart_divQ"></div>
+<script type="text/javascript">
+    google.charts.load('current', {
+        packages: ['corechart', 'bar']
+    });
+    google.charts.setOnLoadCallback(LoadData);
+    function LoadData() {
+        $.ajax({
+            url: 'ColumnCharts/ChartQuarter',
+            dataType: "json",
+            type: "GET",
+            error: function (xhr, status, error) {
+                var err = eval("(" + xhr.responseText + ")");
+                toastr.error(err.message);
+            },
+            success: function (data) {
+                ChartQuarter(data);
+                return false;
+            }
+        });
+        return false;
+    }
+    function ChartQuarter(data) {
+        var dataArray = [
+            ['Period', 'Kvartalni prihodi']
+        ];
+        $.each(data, function (i, item) {
+            dataArray.push([item.adventureName, item.income]);
+        });
+        var data = google.visualization.arrayToDataTable(dataArray);
+        var options = {
+            title: 'Kvartalni prihodi',
+            chartArea: {
+                width: '50%'
+            },
+            colors: ['#b0120a', '#7b1fa2', '#ffab91', '#d95f02'],
+            hAxis: {
+                title: 'Kvartali',
+                minValue: 0
+            },
+            vAxis: {
+                title: 'Prihod'
+            }
+        };
+        var chart = new google.visualization.ColumnChart(document.getElementById('chart_divQ'));
+        chart.draw(data, options);
+        return false;
+    }
+</script>
+
+<div id="chart_divC"></div>
+<script type="text/javascript">
+    google.charts.load('current', {
+        packages: ['corechart', 'bar']
+    });
+    google.charts.setOnLoadCallback(LoadData);
+    function LoadData() {
+        $.ajax({
+            url: 'ColumnCharts/ChartMonth',
+            dataType: "json",
+            type: "GET",
+            error: function (xhr, status, error) {
+                var err = eval("(" + xhr.responseText + ")");
+                toastr.error(err.message);
+            },
+            success: function (data) {
+                ChartMonth(data);
+                return false;
+            }
+        });
+        return false;
+    }
+    function PopulationChartMonth(data) {
+        var dataArray = [
+            ['Period', 'Mesecni prihodi']
+        ];
+        $.each(data, function (i, item) {
+            dataArray.push([item.adventureName, item.income]);
+        });
+        var data = google.visualization.arrayToDataTable(dataArray);
+        var options = {
+            title: 'Mesecni prihodi',
+            chartArea: {
+                width: '50%'
+            },
+            colors: ['#b0120a', '#7b1fa2', '#ffab91', '#d95f02'],
+            hAxis: {
+                title: 'Mesec',
+                minValue: 0
+            },
+            vAxis: {
+                title: 'Prihod'
+            }
+        };
+        var chart = new google.visualization.ColumnChart(document.getElementById('chart_divC'));
+        chart.draw(data, options);
+        return false;
+    }
+</script>
+

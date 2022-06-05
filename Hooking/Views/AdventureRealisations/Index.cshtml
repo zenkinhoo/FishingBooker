@@ -1,0 +1,66 @@
+﻿@model IEnumerable<Hooking.Models.AdventureRealisation>
+
+@{
+    ViewData["Title"] = "Index";
+    List<string> adventureNames = (List<string>)ViewData["AdventureNames"];
+    int index = 0;
+}
+
+<h1>Avanture za rezervaciju</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Naziv
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Duration)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StartDate)
+            </th>
+            
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @adventureNames[index]
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Duration)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Duration)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartDate)
+            </td>
+            <td>
+                @if (User.IsInRole("Instruktor"))
+                {
+                    <a href="@Url.Action("Delete", "AdventureRealisations", new {id = @item.AdventureId})">Obriši</a>
+                }
+                else
+                {
+                    <a href="@Url.Action("ShowAllUsers", "Adventures", new {id = @item.AdventureId})">Odaberi</a>
+                }
+
+            </td>
+            @{
+                index++;
+            }
+
+        </tr>
+}
+    </tbody>
+</table>

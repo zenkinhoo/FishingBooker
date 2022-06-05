@@ -1,0 +1,102 @@
+﻿@model Hooking.Models.Facilities
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Dodaj pogodnosti</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Parking" /> @Html.DisplayNameFor(model => model.Parking)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Wifi" /> @Html.DisplayNameFor(model => model.Wifi)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Heating" /> @Html.DisplayNameFor(model => model.Heating)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="BarbecueFacilities" /> @Html.DisplayNameFor(model => model.BarbecueFacilities)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="OnlineCheckin" /> @Html.DisplayNameFor(model => model.OnlineCheckin)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Jacuzzi" /> @Html.DisplayNameFor(model => model.Jacuzzi)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="SeaView" /> @Html.DisplayNameFor(model => model.SeaView)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="MountainView" /> @Html.DisplayNameFor(model => model.MountainView)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Kitchen" /> @Html.DisplayNameFor(model => model.Kitchen)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="WashingMachine" /> @Html.DisplayNameFor(model => model.WashingMachine)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="AirportShuttle" /> @Html.DisplayNameFor(model => model.AirportShuttle)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="IndoorPool" /> @Html.DisplayNameFor(model => model.IndoorPool)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="OutdoorPool" /> @Html.DisplayNameFor(model => model.OutdoorPool)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="StockedBar" /> @Html.DisplayNameFor(model => model.StockedBar)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Garden" /> @Html.DisplayNameFor(model => model.Garden)
+                </label>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Potvrdi" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

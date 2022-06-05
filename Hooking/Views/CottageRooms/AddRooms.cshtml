@@ -1,0 +1,8 @@
+﻿@{ 
+    var cottage = (Cottage)ViewData["Cottage"];
+}
+<h1>Odaberite jednu od opcija</h1>
+
+<button style="height:200px;width:200px" type="button" onclick="location.href='@Url.Action("Create", "CottageRooms", new { id = cottage.Id})'" class="btn btn-primary">Dodaj sobu</button>
+<button style="height:200px;width:200px" type="button" onclick="location.href='@Url.Page("/Account/Manage/MyCottages", new { area = "Identity" })'" class="btn btn-primary">Završi kreiranje vikendice</button>
+

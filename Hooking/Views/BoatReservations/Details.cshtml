@@ -1,0 +1,96 @@
+﻿@model Hooking.Models.BoatReservation
+
+@{
+    ViewData["Title"] = "Details";
+    var user = (UserDetails)ViewData["UserDetails"];
+    var boat = (Boat)ViewData["Boat"];
+    var phoneNumber = (string)ViewData["PhoneNumber"];
+    var email = (string)ViewData["Email"];
+    var userOwner = (UserDetails)ViewData["UserOwner"];
+
+}
+
+<h4>Rezervacija</h4>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            Naziv
+        </dt>
+        <dd class="col-sm-10">
+            <a href="@Url.Action("Details","Boats",new { id = @boat.Id })">@boat.Name</a>
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.StartDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.StartDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EndDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EndDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PersonCount)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PersonCount)
+        </dd>
+        @if (!User.IsInRole("Korisnik"))
+        {
+            <dt class="col-sm-2">
+                Ime i prezime klijenta
+            </dt>
+            <dd class="col-sm-10">
+                @user.FirstName @user.LastName
+            </dd>
+            <dt class="col-sm-2">
+                Email adresa
+            </dt>
+            <dd class="col-sm-10">
+                @email
+            </dd>
+            <dt class="col-sm-2">
+                Broj telefona
+            </dt>
+            <dd class="col-sm-10">
+                @phoneNumber
+            </dd>
+        }
+
+
+
+    </dl>
+
+    @if (User.IsInRole("Korisnik"))
+    {
+        <div>
+            <h5>Detalji o vlasniku broda</h5>
+            <dl class="row">
+                <dt class="col-sm-2">
+                    Ime i prezime vlasnika
+                </dt>
+                <dd class="col-sm-10">
+                    @userOwner.FirstName @userOwner.LastName
+                </dd>
+                <dt class="col-sm-2">
+                    Adresa
+                </dt>
+                <dd class="col-sm-10">
+                    @userOwner.Address
+                </dd>
+
+            </dl>
+        </div>
+    }
+</div>
+

@@ -1,0 +1,383 @@
+﻿<h1>Izveštaj o poslovanju vikendice</h1>
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+<div style="vertical-align:middle; text-align: center; margin-bottom: 48px">
+
+    <b>
+        <label>Drugs spent at some period of the time</label>
+    </b>
+</div>
+<div id="chart_divY"></div>
+<script type="text/javascript">
+    google.charts.load('current', {
+        packages: ['corechart', 'bar']
+    });
+    google.charts.setOnLoadCallback(LoadData);
+    function LoadData() {
+        $.ajax({
+            url: 'ColumnChart/PopulationChartYear',
+            dataType: "json",
+            type: "GET",
+            error: function (xhr, status, error) {
+                var err = eval("(" + xhr.responseText + ")");
+                toastr.error(err.message);
+            },
+            success: function (data) {
+                PopulationChartYear(data);
+                return false;
+            }
+        });
+        return false;
+    }
+    function PopulationChartYear(data) {
+        var dataArray = [
+            ['Period', 'Spent Drugs per Year']
+        ];
+        $.each(data, function (i, item) {
+            dataArray.push([item.cityName, item.populationYear2020]);
+        });
+        var data = google.visualization.arrayToDataTable(dataArray);
+        var options = {
+            title: 'Yearly spend drugs ',
+            chartArea: {
+                width: '50%'
+            },
+            colors: ['#b0120a', '#7b1fa2', '#ffab91', '#d95f02'],
+            hAxis: {
+                title: 'Years',
+                minValue: 0
+            },
+            vAxis: {
+                title: 'Total Spent Drugs'
+            }
+        };
+        var chart = new google.visualization.ColumnChart(document.getElementById('chart_divY'));
+        chart.draw(data, options);
+        return false;
+    }
+</script>
+
+<div id="chart_divQ"></div>
+<script type="text/javascript">
+    google.charts.load('current', {
+        packages: ['corechart', 'bar']
+    });
+    google.charts.setOnLoadCallback(LoadData);
+    function LoadData() {
+        $.ajax({
+            url: 'ColumnChart/PopulationChartQuarter',
+            dataType: "json",
+            type: "GET",
+            error: function (xhr, status, error) {
+                var err = eval("(" + xhr.responseText + ")");
+                toastr.error(err.message);
+            },
+            success: function (data) {
+                PopulationChartQuarter(data);
+                return false;
+            }
+        });
+        return false;
+    }
+    function PopulationChartQuarter(data) {
+        var dataArray = [
+            ['Period', 'Spent Drugs for each quarter until this moment']
+        ];
+        $.each(data, function (i, item) {
+            dataArray.push([item.cityName, item.populationYear2020]);
+        });
+        var data = google.visualization.arrayToDataTable(dataArray);
+        var options = {
+            title: 'Quarterly spend drugs ',
+            chartArea: {
+                width: '50%'
+            },
+            colors: ['#b0120a', '#7b1fa2', '#ffab91', '#d95f02'],
+            hAxis: {
+                title: 'Quarters',
+                minValue: 0
+            },
+            vAxis: {
+                title: 'Total Spent Drugs'
+            }
+        };
+        var chart = new google.visualization.ColumnChart(document.getElementById('chart_divQ'));
+        chart.draw(data, options);
+        return false;
+    }
+</script>
+
+<div id="chart_divC"></div>
+<script type="text/javascript">
+    google.charts.load('current', {
+        packages: ['corechart', 'bar']
+    });
+    google.charts.setOnLoadCallback(LoadData);
+    function LoadData() {
+        $.ajax({
+            url: 'ColumnChart/PopulationChartMonth',
+            dataType: "json",
+            type: "GET",
+            error: function (xhr, status, error) {
+                var err = eval("(" + xhr.responseText + ")");
+                toastr.error(err.message);
+            },
+            success: function (data) {
+                PopulationChartMonth(data);
+                return false;
+            }
+        });
+        return false;
+    }
+    function PopulationChartMonth(data) {
+        var dataArray = [
+            ['Period', 'Spent Drugs per Months']
+        ];
+        $.each(data, function (i, item) {
+            dataArray.push([item.cityName, item.populationYear2020]);
+        });
+        var data = google.visualization.arrayToDataTable(dataArray);
+        var options = {
+            title: 'Monthly spend drugs',
+            chartArea: {
+                width: '50%'
+            },
+            colors: ['#b0120a', '#7b1fa2', '#ffab91', '#d95f02'],
+            hAxis: {
+                title: 'Months',
+                minValue: 0
+            },
+            vAxis: {
+                title: 'Total Spent Drugs'
+            }
+        };
+        var chart = new google.visualization.ColumnChart(document.getElementById('chart_divC'));
+        chart.draw(data, options);
+        return false;
+    }
+</script>
+
+
+<div style="        vertical-align: middle;
+        text-align: center;
+        margin-bottom: 48px;
+        margin-top: 96px
+">
+    <b>
+        <label>Number of appoitments at some period of the time</label>
+    </b>
+</div>
+
+<div id="chart_appY"></div>
+<script type="text/javascript">
+    google.charts.load('current', {
+        packages: ['corechart', 'bar']
+    });
+    google.charts.setOnLoadCallback(LoadData);
+    function LoadData() {
+        $.ajax({
+            url: 'ColumnChart/AppoitmentChartYear',
+            dataType: "json",
+            type: "GET",
+            error: function (xhr, status, error) {
+                var err = eval("(" + xhr.responseText + ")");
+                toastr.error(err.message);
+            },
+            success: function (data) {
+                AppoitmentChartYear(data);
+                return false;
+            }
+        });
+        return false;
+    }
+    function AppoitmentChartYear(data) {
+        var dataArray = [
+            ['Period', 'Appoitments per Year']
+        ];
+        $.each(data, function (i, item) {
+            dataArray.push([item.cityName, item.populationYear2020]);
+        });
+        var data = google.visualization.arrayToDataTable(dataArray);
+        var options = {
+            title: 'Yearly number of appoitments',
+            chartArea: {
+                width: '50%'
+            },
+            colors: ['#666666', '#66666', '#bbbbbb', '#111111'],
+            hAxis: {
+                title: 'Year',
+                minValue: 0
+            },
+            vAxis: {
+                title: 'Total Appoitments'
+            }
+        };
+        var chart = new google.visualization.ColumnChart(document.getElementById('chart_appY'));
+        chart.draw(data, options);
+        return false;
+    }
+</script>
+
+<div id="chart_appQ"></div>
+<script type="text/javascript">
+    google.charts.load('current', {
+        packages: ['corechart', 'bar']
+    });
+    google.charts.setOnLoadCallback(LoadData);
+    function LoadData() {
+        $.ajax({
+            url: 'ColumnChart/AppoitmentChartQuarter',
+            dataType: "json",
+            type: "GET",
+            error: function (xhr, status, error) {
+                var err = eval("(" + xhr.responseText + ")");
+                toastr.error(err.message);
+            },
+            success: function (data) {
+                AppoitmentChartQuarter(data);
+                return false;
+            }
+        });
+        return false;
+    }
+    function AppoitmentChartQuarter(data) {
+        var dataArray = [
+            ['Period', 'Appoitments for each quarter until this moment']
+        ];
+        $.each(data, function (i, item) {
+            dataArray.push([item.cityName, item.populationYear2020]);
+        });
+        var data = google.visualization.arrayToDataTable(dataArray);
+        var options = {
+            title: 'Quarterly number of appoitments',
+            chartArea: {
+                width: '50%'
+            },
+            colors: ['#666666', '#66666', '#bbbbbb', '#111111'],
+            hAxis: {
+                title: 'Quarter',
+                minValue: 0
+            },
+            vAxis: {
+                title: 'Total Appoitments'
+            }
+        };
+        var chart = new google.visualization.ColumnChart(document.getElementById('chart_appQ'));
+        chart.draw(data, options);
+        return false;
+    }
+</script>
+
+<div id="chart_appC"></div>
+<script type="text/javascript">
+    google.charts.load('current', {
+        packages: ['corechart', 'bar']
+    });
+    google.charts.setOnLoadCallback(LoadData);
+    function LoadData() {
+        $.ajax({
+            url: 'ColumnChart/AppoitmentChartMonth',
+            dataType: "json",
+            type: "GET",
+            error: function (xhr, status, error) {
+                var err = eval("(" + xhr.responseText + ")");
+                toastr.error(err.message);
+            },
+            success: function (data) {
+                AppoitmentChartMonth(data);
+                return false;
+            }
+        });
+        return false;
+    }
+    function AppoitmentChartMonth(data) {
+        var dataArray = [
+            ['Period', 'Appoitments per Months']
+        ];
+        $.each(data, function (i, item) {
+            dataArray.push([item.cityName, item.populationYear2020]);
+        });
+        var data = google.visualization.arrayToDataTable(dataArray);
+        var options = {
+            title: 'Monthly number of appoitments',
+            chartArea: {
+                width: '50%'
+            },
+            colors: ['#666666', '#66666', '#bbbbbb', '#111111'],
+            hAxis: {
+                title: 'Months',
+                minValue: 0
+            },
+            vAxis: {
+                title: 'Total Appoitments'
+            }
+        };
+        var chart = new google.visualization.ColumnChart(document.getElementById('chart_appC'));
+        chart.draw(data, options);
+        return false;
+    }
+</script>
+
+
+<div style="        vertical-align: middle;
+        text-align: center;
+        margin-bottom: 48px;
+        margin-top: 96px
+">
+    <b>
+        <label>
+            Revenue
+        </label>
+    </b>
+</div>
+
+<div id="chart_appS"></div>
+<script type="text/javascript">
+    google.charts.load('current', {
+        packages: ['corechart', 'bar']
+    });
+    google.charts.setOnLoadCallback(LoadData);
+    function LoadData() {
+        $.ajax({
+            url: 'ColumnChart/TotalRevenue',
+            dataType: "json",
+            type: "GET",
+            error: function (xhr, status, error) {
+                var err = eval("(" + xhr.responseText + ")");
+                toastr.error(err.message);
+            },
+            success: function (data) {
+                TotalRevenue(data);
+                return false;
+            }
+        });
+        return false;
+    }
+    function TotalRevenue(data) {
+        var dataArray = [
+            ['Period', 'Revenue  per Months']
+        ];
+        $.each(data, function (i, item) {
+            dataArray.push([item.cityName, item.populationYear2020]);
+        });
+        var data = google.visualization.arrayToDataTable(dataArray);
+        var options = {
+            title: 'Monthly Revenue',
+            chartArea: {
+                width: '50%'
+            },
+            colors: ['#bbbbbb', '#bbbbbb', '#bbbbbb', '#111111'],
+            hAxis: {
+                title: 'Months',
+                minValue: 0
+            },
+            vAxis: {
+                title: 'Total Profit'
+            }
+        };
+        var chart = new google.visualization.ColumnChart(document.getElementById('chart_appS'));
+        chart.draw(data, options);
+        return false;
+    }
+</script>

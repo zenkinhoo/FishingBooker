@@ -1,0 +1,106 @@
+﻿@page
+@model Hooking.Areas.Identity.Pages.Account.Manage.AdventureReservationsModel
+@using Hooking.Models
+@{
+    ViewData["Title"] = "Istorija rezervacija usluga instruktora";
+    ViewData["ActivePage"] = ManageNavPages.AdventureReservations;
+}
+@{
+    List<AdventureRealisation> myAdventureRealisations = (List<AdventureRealisation>)ViewData["AdventureRealisations"];
+    List<AdventureReservation> myAdventureReservations = (List<AdventureReservation>)ViewData["AdventureReservations"];
+    List<Adventure> myAdventures = (List<Adventure>)ViewData["Adventure"];
+    List<Instructor> instructors = (List<Instructor>)ViewData["Instructor"];
+    List<UserDetails> userInstructors = (List<UserDetails>)ViewData["UserInstructor"];
+
+
+}
+<h4>Moje rezervacije avantura</h4>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Ime
+            </th>
+            <th>
+                Prezime
+            </th>
+            <th>
+                Adresa
+            </th>
+            <th>
+                Naziv avanture
+            </th>
+            <th>
+                Adresa avanture
+            </th>
+            <th>
+                Grad
+            </th>
+            <th>
+                Drzava
+            </th>
+            <th>
+                Opis
+            </th>
+            <th>
+                Cena
+            </th>
+            <th>
+                Datum pocetka
+            </th>
+            <th>
+                Trajanje
+            </th>
+    </thead>
+    <tbody>
+        @for (int i = 0; i < userInstructors.Count; i++)
+        {
+            @if (DateTime.Compare(myAdventureRealisations[i].StartDate, DateTime.Now) > 0)
+            {
+                <tr>
+                    <td>
+                        @userInstructors[i].FirstName
+                    </td>
+                    <td>
+                        @userInstructors[i].LastName
+                    </td>
+                    <td>
+                        @userInstructors[i].Address
+                    </td>
+                    <td>
+                        @myAdventures[i].Name
+                    </td>
+                    <td>
+                        @myAdventures[i].Address
+                    </td>
+                    <td>
+                        @myAdventures[i].City
+                    </td>
+                    <td>
+                        @myAdventures[i].Country
+                    </td>
+                    <td>
+                        @myAdventures[i].Description
+                    </td>
+                    <td>
+                        @myAdventureRealisations[i].Price
+                    </td>
+                    <td>
+                        @myAdventureRealisations[i].StartDate
+                    </td>
+                    <td>
+                        @myAdventureRealisations[i].Duration
+                    </td>
+                    <td>
+                        <a href="@Url.Action("Delete", "AdventureReservations", new { Id = @myAdventureReservations[i].Id })">Otkazi rezervaciju</a>
+                    </td>
+                </tr>
+            }
+        }
+
+
+
+
+    </tbody>
+</table>

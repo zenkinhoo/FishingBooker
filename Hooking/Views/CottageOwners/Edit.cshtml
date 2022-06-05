@@ -1,0 +1,29 @@
+﻿@model Hooking.Models.CottageOwner
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Izmena profila</h1>
+
+<h4>Vlasnik vikendice</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <input type="submit" value="Potvrdi" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Details">Povratak na pregled profila</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

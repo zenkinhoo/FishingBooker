@@ -1,0 +1,173 @@
+﻿@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService authorizationService
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> _signInManager
+@inject UserManager<IdentityUser> _userManager
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Hooking</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.9.1/fullcalendar.min.css" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.9.1/fullcalendar.print.css" media="print" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/qtip2/3.0.3/jquery.qtip.min.css" />
+
+
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Hooking</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    <partial name="_LoginPartial" />
+                    <ul class="navbar-nav flex-grow-1">
+                        @if (!User.IsInRole("Admin") && !User.IsInRole("Instruktor"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index" id="home">Početna</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Cottages" asp-action="Index" id="cottages">Vikendice</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Boats" asp-action="Index" id="boats">Brodovi</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Instructors" asp-action="Index" id="instructors">Instruktori</a>
+                            </li>
+
+                        }
+                        @if (_signInManager.IsSignedIn(User))
+                        {
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Role" asp-action="Index" id="roles">Uloge</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="RegistrationRequests" asp-action="Index" id="requests">Zahtevi</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/RegisterAdmin" id="registration">Registracija admina</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="SystemOptions" asp-action="Index" id="options">Podešavanja</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Records" id="records">Evidencija</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Appeals">Žalbe</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Reviews">Revizije</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="ReservationReviews">Recenzije</a>
+                                </li>
+
+                            }
+                        }
+                        @if (_signInManager.IsSignedIn(User))
+                        {
+                            @if (User.IsInRole("Instruktor"))
+                            {
+
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="AdventureReservations" asp-action="AdventureReservationHistory" id="reservation-history">Istorija rezervacija</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="AdventureReservations" asp-action="Index" id="reservations">Rezervacije</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Adventures" asp-action="InstructorIndex" id="adventures">Moje avanture</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="InstructorNotAvailablePeriods" asp-action="Index" id="calendar">Kalendar dostupnosti</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="AdventureSpecialOffers" asp-action="Index" id="special-offers">Specijalne ponude</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="ColumnCharts" asp-action="Index">Izveštaj</a>
+                                </li>
+
+
+                            }
+                        }
+                        @if (_signInManager.IsSignedIn(User))
+                        {
+                            @if (User.IsInRole("Korisnik"))
+                            {
+                                //   <li class="nav-item">
+                                //      <a class="nav-link text-dark" asp-area="" asp-controller="CottageReservations" asp-action="Create">Unesi rezervaciju vikendice</a>
+
+                                //    </li>
+                                //   <li class="nav-item">
+                                //        <a class="nav-link text-dark" asp-area="" asp-controller="CottageReservations" asp-action="CottageReservationsHistory">Istorija rezervacija vikendica</a>
+                                //     </li>
+                                //   <li class="nav-item">
+                                //      <a class="nav-link text-dark" asp-area="" asp-controller="BoatReservations" asp-action="Create">Unesi rezervaciju broda</a>
+                                //  </li>
+                                //    <li class="nav-item">
+                                //     <a class="nav-link text-dark" asp-area="" asp-controller="BoatReservations" asp-action="BoatReservationsHistory">Istorija rezervacija brodova</a>
+                                //   </li>
+                                // <li class="nav-item">
+                                //     <a class="nav-link text-dark" asp-area="" asp-controller="Instructors" asp-action="Create">Unesi instruktora</a>
+                                //  </li>
+
+
+                                //   <li class="nav-item">
+                                //    <a class="nav-link text-dark" asp-area="" asp-controller="Adventures" asp-action="Create">Unesi avanturu</a>
+                                //   </li>
+
+                                //  <li class="nav-item">
+                                //    <a class="nav-link text-dark" asp-area="" asp-controller="Adventures" asp-action="Create">Unesi avanturu</a>
+                                //    </li>
+                                //    <li class="nav-item">
+                                //      <a class="nav-link text-dark" asp-area="" asp-controller="AdventureRealisations" asp-action="Create">Unesi realizaciju avanture</a>
+                                //   </li>
+                                //    <li class="nav-item">
+                                //      <a class="nav-link text-dark" asp-area="" asp-controller="AdventureReservations" asp-action="Create">Unesi rezervaciju avanture</a>
+                                //      </li>
+                                //  <li class="nav-item">
+                                //   <a class="nav-link text-dark" asp-area="" asp-controller="AdventureFavorites" asp-action="Create">Unesi omiljenu avanturu</a>
+                                //   </li>
+                            }
+                        }
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2021 - Hooking - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/qtip2/3.0.3/jquery.qtip.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.9.1/fullcalendar.min.js"></script>
+    @RenderSection("Scripts", required: false)
+
+
+</body>
+</html>

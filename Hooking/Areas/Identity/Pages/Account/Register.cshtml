@@ -1,0 +1,141 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Registracija";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div >
+    <div class="m-4">
+        <ul class="nav nav-tabs" id="myTab">
+            <li class="nav-item">
+                <a href="#home" class="nav-link active" data-bs-toggle="tab" onclick="tab1Click()">Registracija</a>
+            </li>
+            <li class="nav-item">
+                <a href="#profile" class="nav-link" data-bs-toggle="tab">Registracija vlasnika i instruktora</a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane fade show active" id="home">
+                <h4 class="mt-2">Registrujte se kao običan korisnik</h4>
+                <div class="col-md-4">
+                    <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                        <hr />
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                        <div class="form-group">
+                            <label asp-for="Input.Email"></label>
+                            <input asp-for="Input.Email" class="form-control" />
+                            <span asp-validation-for="Input.Email" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Input.Password"></label>
+                            <input asp-for="Input.Password" class="form-control" />
+                            <span asp-validation-for="Input.Password" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Input.ConfirmPassword"></label>
+                            <input asp-for="Input.ConfirmPassword" class="form-control" />
+                            <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Input.Name"></label>
+                            <input asp-for="Input.Name" class="form-control" />
+                            <span asp-validation-for="Input.Name" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Input.LastName"></label>
+                            <input asp-for="Input.LastName" class="form-control" />
+                            <span asp-validation-for="Input.LastName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Input.Location"></label>
+                            <input asp-for="Input.Location" class="form-control" id="autocomplete" placeholder="" type="text" />
+                            <span asp-validation-for="Input.Location" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Input.Description" class="control-label" hidden></label>
+                            <textarea asp-for="Input.Description" class="form-control" hidden id="text_area_primary">No Description</textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Registracija</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="profile">
+                <h4 class="mt-2">Registracija vlasnika vikendica, brodova i instruktora</h4>
+                <div class="col-md-4">
+                    <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                        <hr />
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                        <div class="form-group">
+                            <label asp-for="Input.Email"></label>
+                            <input asp-for="Input.Email" class="form-control" />
+                            <span asp-validation-for="Input.Email" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Input.Password"></label>
+                            <input asp-for="Input.Password" class="form-control" />
+                            <span asp-validation-for="Input.Password" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Input.ConfirmPassword"></label>
+                            <input asp-for="Input.ConfirmPassword" class="form-control" />
+                            <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Input.Name"></label>
+                            <input asp-for="Input.Name" class="form-control" />
+                            <span asp-validation-for="Input.Name" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Input.LastName"></label>
+                            <input asp-for="Input.LastName" class="form-control" />
+                            <span asp-validation-for="Input.LastName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Input.Location"></label>
+                            <input asp-for="Input.Location" class="form-control" id="autocomplete" placeholder="" type="text" />
+                            <span asp-validation-for="Input.Location" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Input.Type"></label>
+                            <select asp-for="Input.Type" class="form-control">
+                                <option value="1">Vlasnik vikendice</option>
+                                <option value="2">Vlasnik broda</option>
+                                <option value="3">Instruktor</option>
+                            </select>
+                            <span asp-validation-for="Input.Type" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">  
+                            <label asp-for="Input.Description" class="control-label"></label>  
+                            <textarea asp-for="Input.Description" class="form-control"></textarea>  
+                        </div> 
+                        <button type="submit" class="btn btn-primary">Registracija</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        window.addEventListener('load', function() {
+            document.getElementById('text_area_primary').innerHTML = 'No description';
+        });
+    </script>
+}
+<script>
+    let autocomplete;
+    function initAutocomplete() {
+        autocomplete = new google.maps.places.Autocomplete(document.getElementById('autocomplete'),
+            {
+                types: ['(cities)'],
+                componentRestrictions: { 'country': ['RS', 'HR', 'HU', 'BA', 'ME'] },
+                fields: ['place_id', 'geometry', 'name']
+            });
+    }
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBFyDb4sQJ5p8BIkNML5Ai_d4tR2eMXYfc&libraries=places&callback=initAutocomplete" async defer></script>

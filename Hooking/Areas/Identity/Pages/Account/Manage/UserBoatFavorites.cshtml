@@ -1,0 +1,70 @@
+﻿@page
+@model Hooking.Areas.Identity.Pages.Account.Manage.UserBoatFavoritesModel
+@using Hooking.Models
+
+@{
+    ViewData["Title"] = "Omiljeni brodovi";
+    ViewData["ActivePage"] = ManageNavPages.UserBoatFavorites;
+    List<Boat> boatData = (List<Boat>)ViewData["BoatData"];
+    List<Guid> boatFavoritesId = (List<Guid>)ViewData["BoatFavoritesId"];
+    int i = 0;
+
+}
+<h4>Moji omiljeni brodovi</h4>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Naziv
+            </th>
+            <th>
+                Adresa
+            </th>
+            <th>
+                Grad
+            </th>
+            <th>
+                Država
+            </th>
+            <th>
+                Opis
+            </th>
+            <th>
+                Prosečna ocena
+            </th>
+    </thead>
+    <tbody>
+        @foreach (var item in boatData)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.City)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Country)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AverageGrade)
+            </td>
+            <td>
+                <a href="@Url.Action("Delete", "BoatFavorites", new { Id = boatFavoritesId[i] })">Otkazi pretplatu</a>
+
+            </td>
+            <td>
+                <a href="@Url.Action("Index", "BoatSpecialOffers", new { Id = boatData[i].Id })">Specijalne ponude</a>
+            </td>
+        </tr>
+            i++;
+        }
+    </tbody>
+</table>

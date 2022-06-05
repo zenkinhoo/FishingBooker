@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Hooking.Models.UserDeleteRequest>
+
+@{
+    ViewData["Title"] = "Zahtevi za brisanje naloga";
+}
+
+<h1>@ViewData["Title"]</h1>
+<br/>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsApproved)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Type)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsApproved)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Type)
+            </td>
+            <td>
+                @if (!item.isReviewed)
+                {
+                    <a asp-action="DenyRequest" asp-route-id="@item.Id">Odbij | </a>
+                    <a asp-action="GrantRequest" asp-route-id="@item.Id">Odobri</a>
+                }
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

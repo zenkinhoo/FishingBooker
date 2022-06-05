@@ -1,0 +1,109 @@
+﻿@using Microsoft.AspNetCore.Identity
+@model IEnumerable<Hooking.Models.Instructor>
+@inject SignInManager<IdentityUser> _signInManager
+
+@{
+    ViewData["Title"] = "Instruktori";
+    List<UserDetails> userInstructors = (List<UserDetails>)ViewData["UserInstructors"];
+    double price = (double)ViewData["Price"];
+    int MaxPersonCount = (int)ViewData["MaxPersonCount"];
+    double AverageGrade = (double)ViewData["AverageGrade"];
+    string City = (string)ViewData["City"];
+    DateTime StartDate = (DateTime)ViewData["StartDate"];
+    DateTime EndDate = (DateTime)ViewData["EndDate"];
+
+    int i = 0;
+
+}
+
+<h1>Instruktori</h1>
+
+
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["Name"]">Ime</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["LastName"]">Prezime</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["Address"]">Adresa</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["City"]">Grad</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["Country"]">Drzava</a>
+            </th>
+            <th>
+                Prosecna ocena
+            </th>
+            <th>
+                Zbirna ocena
+            </th>
+            <th>
+                Biografija
+            </th>
+
+            <th>
+
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+
+            <tr>
+                @if (userInstructors.Count > 0 && i < userInstructors.Count)
+                {
+
+                    <td>
+                        @userInstructors[i].FirstName
+                    </td>
+                    <td>
+                        @userInstructors[i].LastName
+                    </td>
+                    <td>
+                        @userInstructors[i].Address
+                    </td>
+                    <td>
+                        @userInstructors[i].City
+                    </td>
+                    <td>
+                        @userInstructors[i].Country
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AverageGrade)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.GradeCount)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Biography)
+                    </td>
+                    <td>
+                        <a href="@Url.Action("AdventuresForReservation", "Instructors", new { Id = @item.Id,StartDate=StartDate,EndDate=EndDate,price=price,City=City,AverageGrade=AverageGrade,MaxPersonCount=MaxPersonCount })">Nastavi na rezervaciju</a>
+
+
+                        @if (_signInManager.IsSignedIn(User))
+                        {
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <a asp-action="Delete" asp-route-id="@item.Id"> | Obriši</a>
+                            }
+                        }
+                    </td>
+                }
+
+
+            </tr>
+            i++;
+        }
+    </tbody>
+</table>

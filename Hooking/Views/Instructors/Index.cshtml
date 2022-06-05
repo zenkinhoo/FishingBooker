@@ -1,0 +1,132 @@
+﻿@using Microsoft.AspNetCore.Identity
+@model IEnumerable<Hooking.Models.Instructor>
+@inject SignInManager<IdentityUser> _signInManager
+
+@{
+    ViewData["Title"] = "Instruktori";
+    List<UserDetails> userInstructors = (List<UserDetails>)ViewData["UserInstructors"];
+    List<Instructor> instructors = (List<Instructor>)ViewData["Instructors"];
+    int i = 0;
+
+}
+
+<h1>Instruktori</h1>
+<h4 style="color: red">@ViewData["StatusMessage"]</h4>
+
+<br>
+@if (_signInManager.IsSignedIn(User))
+{
+    @if (User.IsInRole("Korisnik"))
+    {
+        <a asp-controller="AdventureReservationFilters" asp-action="Create">Napravi novu rezervaciju</a>
+
+    }
+}
+
+
+<div class="row">
+    <div class="col-md-2">
+    </div>
+    <div class="col-md-8">
+        <form asp-controller="Instructors" asp-action="Index" class="form-inline">
+            <p>
+                Pretraži po: @Html.TextBox("SearchString")
+
+                <select name="filter" id="filter" style="background-color: transparent;">
+                    <option value="FirstName" class="option">Imenu</option>
+                    <option value="LastName" class="option">Prezimenu</option>
+                    <option value="Country" class="option">Drzavi</option>
+                    <option value="City" class="option">Gradu</option>
+                </select>
+                <input type="submit" value="Pretraži" />
+            </p>
+        </form>
+    </div>
+    <div class="col-md-2">
+    </div>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="FirstName">Ime</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="LastName">Prezime</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="Address">Adresa</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="City">Grad</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="Country">Drzava</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="AverageGrade">Prosecna ocena</a>
+            </th>
+            <th>
+                Broj ocena
+            </th>
+            <th>
+                Biografija
+            </th>
+
+            <th>
+
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+
+        <tr>
+            @if (userInstructors.Count > 0 && i < userInstructors.Count)
+            {
+
+                <td>
+                    @userInstructors[i].FirstName
+                </td>
+                <td>
+                    @userInstructors[i].LastName
+                </td>
+                <td>
+                    @userInstructors[i].Address
+                </td>
+                <td>
+                    @userInstructors[i].City
+                </td>
+                <td>
+                    @userInstructors[i].Country
+                </td>
+                <td>
+                    @instructors[i].AverageGrade
+                </td>
+                <td>
+                    @instructors[i].GradeCount
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Biography)
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.Id">Prikaži još</a>
+
+                    @if (_signInManager.IsSignedIn(User))
+                    {
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <a asp-action="Delete" asp-route-id="@item.Id"> | Obriši</a>
+                        }
+                    }
+                </td>
+            }
+
+
+        </tr>
+            i++;
+        }
+    </tbody>
+</table>

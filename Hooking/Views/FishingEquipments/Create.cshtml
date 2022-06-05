@@ -1,0 +1,43 @@
+﻿@model Hooking.Models.FishingEquipment
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h4>Oprema za pecanje</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="LiveBite" /> @Html.DisplayNameFor(model => model.LiveBite)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="FlyFishingGear" /> @Html.DisplayNameFor(model => model.FlyFishingGear)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Lures" /> @Html.DisplayNameFor(model => model.Lures)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="RodsReelsTackle" /> @Html.DisplayNameFor(model => model.RodsReelsTackle)
+                </label>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Potvrdi" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

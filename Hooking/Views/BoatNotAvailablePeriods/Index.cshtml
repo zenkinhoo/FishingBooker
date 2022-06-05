@@ -1,0 +1,64 @@
+﻿@model IEnumerable<Hooking.Models.BoatNotAvailablePeriod>
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> _signInManager
+@{
+    ViewData["Title"] = "Index";
+
+}
+@{
+    var boat = (Boat)ViewData["Boat"];
+}
+<h4>Kalendar dostupnosti broda @boat.Name</h4>
+@if (_signInManager.IsSignedIn(User))
+{
+    @if (User.IsInRole("Vlasnik broda"))
+    {
+        <a href="@Url.Action("Create","BoatNotAvailablePeriods",new { id = boat.Id})">Definiši period nedostupnosti</a>
+    }
+}
+@section Scripts {
+
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-157cd5b220a5c80d4ff8e0e70ac069bffd87a61252088146915e8726e5d9f147.js"></script>
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/semantic.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.js'></script>
+    <script>
+       $(document).ready(function () {
+        $('#calendar').fullCalendar({
+            header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'month,basicWeek,basicDay'
+            },
+            defaultDate: new Date().toISOString().split('T')[0],
+            navLinks: true, // can click day/week names to navigate views
+            editable: true,
+            eventLimit: true, // allow "more" link when too many events
+        events: @Html.Raw(ViewData["codeForFront"])
+        });
+    });
+    </script>
+
+}
+<div class="row">
+    <div class="panel-heading">
+        <div class="col-md-8  custom-heading3">
+            <h3>
+                <i class="fa fa-calendar"></i>
+            </h3>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-9 col-xs-push-2">
+        <div class="box box-primary">
+            <div class="box-body no-padding">
+                <div id="calendar"></div>
+            </div>
+        </div>
+    </div>
+</div>
+

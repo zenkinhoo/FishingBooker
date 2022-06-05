@@ -1,0 +1,69 @@
+﻿@page
+@model Hooking.Areas.Identity.Pages.Account.Manage.CottagesReservationsHistoryModel
+@{
+    ViewData["Title"] = "Istorija rezervacija";
+    ViewData["ActivePage"] = ManageNavPages.CottagesReservationsHistory;
+}
+@{
+    var cottageNames = (List<string>)ViewData["CottageNames"];
+    var index = 0;
+}
+
+<h4>Istorija rezervacija</h4>
+<table class="table">
+    <thead>
+        <tr>
+
+            <th>
+                Naziv vikendice
+            </th>
+            <th>
+                Od
+            </th>
+            <th>
+                Do
+            </th>
+            <th>
+                Cena
+            </th>
+            <th>
+                Broj osoba
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.cottageReservations)
+        {
+            <tr>
+                <th>
+                    @cottageNames[index]
+                </th>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EndDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaxPersonCount)
+                </td>
+                <td>
+                    @if (!item.IsReviewed)
+                    {
+                        <a href="@Url.Action("Create", "CottageReservationReviews", new { Id = @item.Id })">Recenzija</a> 
+                    }
+                    <a href="@Url.Action("Details", "CottageReservations", new { Id = @item.Id })">Prikaži još</a>
+                </td>
+                @{
+                    index++;
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+

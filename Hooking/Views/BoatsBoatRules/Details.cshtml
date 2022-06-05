@@ -1,0 +1,36 @@
+﻿@model Hooking.Models.BoatsBoatRules
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>BoatsBoatRules</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.BoatId)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.BoatId)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.BoatRulesId)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.BoatRulesId)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.RowVersion)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.RowVersion)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

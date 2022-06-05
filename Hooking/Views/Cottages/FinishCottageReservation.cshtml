@@ -1,0 +1,403 @@
+﻿@model Hooking.Models.Cottage
+
+
+
+@{
+    ViewData["Title"] = "Prikaz vikendice";
+}
+@{
+    var cottageOwner = (UserDetails)ViewData["CottageOwner"];
+    var houseRules = (HouseRules)ViewData["HouseRules"];
+    var cancelationPolicy = (CancelationPolicy)ViewData["CancellationPolicyId"];
+    var facilites = (Facilities)ViewData["Facilities"];
+    var fullAddress = (string)ViewData["FullAddress"];
+    List<CottageRoom> cottageRooms = (List<CottageRoom>)ViewData["CottageRooms"];
+    List<CottageImage> cottageImages = (List<CottageImage>)ViewData["CottageImages"];
+    DateTime startDate = (DateTime)ViewData["StartDate"];
+    DateTime endDate = (DateTime)ViewData["EndDate"];
+    int MaxPersonCount = (int)ViewData["MaxPersonCount"];
+
+}
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false" type="text/javascript"></script>
+
+<h1>Vikendica @Model.Name</h1>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.City)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.City)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Country)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Country)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.RoomCount)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.RoomCount)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Area)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Area)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.AverageGrade)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.AverageGrade)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.GradeCount)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.GradeCount)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.RegularPrice)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.RegularPrice)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.WeekendPrice)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.WeekendPrice)
+        </dd>
+        <dt class="col-sm-2">
+            Vlasnik
+        </dt>
+        <dd class="col-sm-10">
+            @cottageOwner.FirstName @cottageOwner.LastName
+        </dd>
+
+    </dl>
+</div>
+<br />
+<a href="@Url.Action("Index","CottageNotAvailablePeriods",new { id = @Model.Id})">Kalendar dostupnosti</a>
+<br />
+<h4>Lokacija</h4>
+<div name="GoogleMap">
+
+    <div class="mapouter">
+        <div class="gmap_canvas">
+            <iframe width="800" height="500" id="gmap_canvas" src="https://maps.google.com/maps?q=@fullAddress&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><a href="https://www.online-timer.net">timer</a><br>
+            <style>
+                .mapouter {
+                    position: relative;
+                    text-align: right;
+                    height: 500px;
+                    width: 800px;
+                }
+            </style><a href="https://www.embedgooglemap.net">embedded google maps in website</a>
+            <style>
+                .gmap_canvas {
+                    overflow: hidden;
+                    background: none !important;
+                    height: 500px;
+                    width: 800px;
+                }
+            </style>
+        </div>
+    </div>
+</div>
+<div>
+    <h4>Pravila ponašanja</h4>
+    <hr />
+    <dl class="row">
+        @if (houseRules.PetFriendly)
+        {
+            <dt class="col-sm-2">
+                Dozvoljeni kućni ljubimci
+            </dt>
+            <dd class="col-sm-10">
+                <span style="font-family: wingdings; font-size: 100%; color:green">&#10004;</span>
+            </dd>
+        }
+        else
+        {
+            <dt class="col-sm-2">
+                Dozvoljeni kućni ljubimci
+            </dt>
+            <dd class="col-sm-10">
+                <span style="font-family: wingdings; font-size: 100%; color:red">&#10007;</span>
+            </dd>
+        }
+        @if (houseRules.NonSmoking)
+        {
+            <dt class="col-sm-2">
+                Zabranjeno pušenje
+            </dt>
+            <dd class="col-sm-10">
+                <span style="font-family: wingdings; font-size: 100%; color:green">&#10004;</span>
+            </dd>
+        }
+        else
+        {
+            <dt class="col-sm-2">
+                Zabranjeno pušenje
+            </dt>
+            <dd class="col-sm-10">
+                <span style="font-family: wingdings; font-size: 100%; color:red">&#10007;</span>
+            </dd>
+        }
+        <dt class="col-sm-2">
+            Vreme prijave u smeštaj
+        </dt>
+        <dd class="col-sm-10">
+            @houseRules.CheckInTime
+        </dd>
+        <dt class="col-sm-2">
+            Vreme odjave iz smeštaja
+        </dt>
+        <dd class="col-sm-10">
+            @houseRules.CheckOutTime
+        </dd>
+        <dt class="col-sm-2">
+            Limit za broj godina
+        </dt>
+        <dd class="col-sm-10">
+            @if (houseRules.AgeRestriction == 0)
+            {
+                @Html.Raw("Nema limita");
+            }
+            else
+            {
+                @Html.Raw(houseRules.AgeRestriction);
+            }
+        </dd>
+
+    </dl>
+</div>
+<div>
+    <h4>Uslovi otkazivanja</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            Besplatno otkazivanje do (broj dana)
+        </dt>
+        <dd class="col-sm-10">
+            @cancelationPolicy.FreeUntil
+        </dd>
+        <dt class="col-sm-2">
+            Procenat od uplate koji se zadržava u slučaju otkaza
+        </dt>
+        <dd class="col-sm-10">
+            @cancelationPolicy.PenaltyPercentage
+        </dd>
+    </dl>
+</div>
+<div>
+    <h4>Pogodnosti</h4>
+    <hr />
+    <dl class="row">
+        @if (facilites.Parking)
+        {
+            <dt class="col-sm-2">
+                Parking
+            </dt>
+            <dd class="col-sm-10">
+                <span style="font-family: wingdings; font-size: 100%; color:green">&#10004;</span>
+            </dd>
+        }
+        @if (facilites.Wifi)
+        {
+            <dt class="col-sm-2">
+                WiFi
+            </dt>
+            <dd class="col-sm-10">
+                <span style="font-family: wingdings; font-size: 100%; color:green">&#10004;</span>
+            </dd>
+        }
+        @if (facilites.Heating)
+        {
+            <dt class="col-sm-2">
+                Grejanje
+            </dt>
+            <dd class="col-sm-10">
+                <span style="font-family: wingdings; font-size: 100%; color:green">&#10004;</span>
+            </dd>
+        }
+        @if (facilites.Kitchen)
+        {
+            <dt class="col-sm-2">
+                Kuhinja
+            </dt>
+            <dd class="col-sm-10">
+                <span style="font-family: wingdings; font-size: 100%; color:green">&#10004;</span>
+            </dd>
+        }
+        @if (facilites.OnlineCheckin)
+        {
+            <dt class="col-sm-2">
+                Online prijavljivanje u smeštaj
+            </dt>
+            <dd class="col-sm-10">
+                <span style="font-family: wingdings; font-size: 100%; color:green">&#10004;</span>
+            </dd>
+        }
+        @if (facilites.MountainView)
+        {
+            <dt class="col-sm-2">
+                Pogled na planinu
+            </dt>
+            <dd class="col-sm-10">
+                <span style="font-family: wingdings; font-size: 100%; color:green">&#10004;</span>
+            </dd>
+        }
+        @if (facilites.SeaView)
+        {
+            <dt class="col-sm-2">
+                Pogled na more
+            </dt>
+            <dd class="col-sm-10">
+                <span style="font-family: wingdings; font-size: 100%; color:green">&#10004;</span>
+            </dd>
+        }
+        @if (facilites.IndoorPool)
+        {
+            <dt class="col-sm-2">
+                Zatvoreni bazen
+            </dt>
+            <dd class="col-sm-10">
+                <span style="font-family: wingdings; font-size: 100%; color:green">&#10004;</span>
+            </dd>
+        }
+        @if (facilites.OutdoorPool)
+        {
+            <dt class="col-sm-2">
+                Otvoreni bazen
+            </dt>
+            <dd class="col-sm-10">
+                <span style="font-family: wingdings; font-size: 100%; color:green">&#10004;</span>
+            </dd>
+        }
+        @if (facilites.Jacuzzi)
+        {
+            <dt class="col-sm-2">
+                Đakuzi
+            </dt>
+            <dd class="col-sm-10">
+                <span style="font-family: wingdings; font-size: 100%; color:green">&#10004;</span>
+            </dd>
+        }
+        @if (facilites.StockedBar)
+        {
+            <dt class="col-sm-2">
+                Mini-bar
+            </dt>
+            <dd class="col-sm-10">
+                <span style="font-family: wingdings; font-size: 100%; color:green">&#10004;</span>
+            </dd>
+        }
+        @if (facilites.WashingMachine)
+        {
+            <dt class="col-sm-2">
+                Veš mašina
+            </dt>
+            <dd class="col-sm-10">
+                <span style="font-family: wingdings; font-size: 100%; color:green">&#10004;</span>
+            </dd>
+        }
+        @if (facilites.Garden)
+        {
+            <dt class="col-sm-2">
+                Dvorište
+            </dt>
+            <dd class="col-sm-10">
+                <span style="font-family: wingdings; font-size: 100%; color:green">&#10004;</span>
+            </dd>
+        }
+    </dl>
+</div>
+<h4>Sobe</h4>
+@foreach (var cottageRoom in cottageRooms)
+{
+    <div>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">
+                Broj kreveta
+            </dt>
+            <dd class="col-sm-10">
+                @cottageRoom.BedCount
+            </dd>
+
+            @if (cottageRoom.AirCondition)
+            {
+                <dt class="col-sm-2">
+                    Klima uređaj
+                </dt>
+                <dd class="col-sm-10">
+                    <span style="font-family: wingdings; font-size: 100%; color:green">&#10004;</span>
+                </dd>
+            }
+            @if (cottageRoom.TV)
+            {
+                <dt class="col-sm-2">
+                    TV
+                </dt>
+                <dd class="col-sm-10">
+                    <span style="font-family: wingdings; font-size: 100%; color:green">&#10004;</span>
+                </dd>
+            }
+            @if (cottageRoom.Balcony)
+            {
+                <dt class="col-sm-2">
+                    Terasa
+                </dt>
+                <dd class="col-sm-10">
+                    <span style="font-family: wingdings; font-size: 100%; color:green">&#10004;</span>
+                </dd>
+            }
+        </dl>
+    </div>
+}
+<div class="row">
+
+    @foreach (var item in cottageImages)
+    {
+        <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+
+            <a class="thumbnail" href="@item.ImageUrl">
+                <img class="img-responsive" src="@item.ImageUrl" style="height: 100%;width:100%;" alt="">
+            </a>
+
+        </div>
+
+
+    }
+</div>
+
+<a href="@Url.Action("CottageReservationFinished", "CottageReservations" ,new { CottageId = Model.Id, StartDate=startDate, EndDate=endDate, Price=Model.RegularPrice, MaxPersonCount = MaxPersonCount })">Potvrdi rezervaciju</a>
+
+
+

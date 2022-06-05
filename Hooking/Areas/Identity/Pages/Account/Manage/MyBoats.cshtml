@@ -1,0 +1,77 @@
+﻿@page
+@model Hooking.Areas.Identity.Pages.Account.Manage.MyBoatsModel
+@{
+    ViewData["Title"] = "Moji brodovi";
+    ViewData["ActivePage"] = ManageNavPages.MyBoats;
+}
+<h4>@ViewData["Title"]</h4>
+<p>
+    <a href="@Url.Action("Create", "Boats")">Dodaj novi brod</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+               Naziv
+            </th>
+            <th>
+               Tip
+            </th>
+            <th>
+               Dužina
+            </th>
+            <th>
+                Kapacitet
+            </th>
+            <th>
+                Adresa
+            </th>
+            <th>
+               Grad
+            </th>
+            <th>
+               Država
+            </th>
+            <th>
+                Prosečna ocena
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.myBoats)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Type)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Length)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Capacity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.City)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Country)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AverageGrade)
+                </td>
+                <td>
+                    <a href="@Url.Action("MyBoatDetails", "Boats", new { Id = @item.Id })">Prikaži još</a> |
+                    <a href="@Url.Action("Delete", "Boats", new { Id = @item.Id })">Ukloni</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

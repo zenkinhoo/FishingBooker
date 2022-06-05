@@ -1,0 +1,71 @@
+﻿@model IEnumerable<Hooking.Models.Amenities>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Gps)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Radar)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VhrRadio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sonar)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FishFinder)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.WiFi)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RowVersion)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Gps)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Radar)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VhrRadio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sonar)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FishFinder)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.WiFi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RowVersion)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

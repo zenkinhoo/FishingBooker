@@ -1,0 +1,48 @@
+﻿@model Hooking.Models.FishingEquipment
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>FishingEquipment</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.LiveBite)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.LiveBite)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.FlyFishingGear)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.FlyFishingGear)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Lures)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Lures)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.RodsReelsTackle)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.RodsReelsTackle)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.RowVersion)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.RowVersion)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

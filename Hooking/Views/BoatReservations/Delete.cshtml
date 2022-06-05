@@ -1,0 +1,86 @@
+﻿@model Hooking.Models.BoatReservation
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+@if ((Model.StartDate - DateTime.Now).Days > 3)
+{
+    <h3>Jeste li sigurni da zelite da otkazete rezervaciju?</h3>
+    <div>
+        <hr />
+        <dl class="row">
+
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.StartDate)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.StartDate)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.EndDate)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.EndDate)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Price)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Price)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.PersonCount)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.PersonCount)
+            </dd>
+
+        </dl>
+
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="Id" />
+            <input type="submit" value="Otkazi" class="btn btn-danger" /> |
+            <a href='javascript:history.go(-1)'>>Nazad</a>
+        </form>
+    </div>
+}
+else
+{
+    <h3>Ne mozete otkazati rezervaciju 3 dana pred istu</h3>
+    <div>
+        <hr />
+        <dl class="row">
+
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.StartDate)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.StartDate)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.EndDate)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.EndDate)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Price)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Price)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.PersonCount)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.PersonCount)
+            </dd>
+
+        </dl>
+
+        <form asp-action="Delete">
+            <a href='javascript:history.go(-1)'>>Nazad</a>
+        </form>
+    </div>
+}

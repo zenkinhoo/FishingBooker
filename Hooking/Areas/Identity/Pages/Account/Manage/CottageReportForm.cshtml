@@ -1,0 +1,55 @@
+﻿@page
+@model Hooking.Areas.Identity.Pages.Account.Manage.CottageReportFormModel
+
+@{
+    List<string> cottageNames = (List<string>)ViewData["CottageNames"];
+    List<double> cottageIncomes = (List<double>)ViewData["CottageIncomes"];
+    List<int> cottageNumOfReservations = (List<int>)ViewData["CottageNumOfReservations"];
+    List<double> averageGrades = (List<double>)ViewData["AverageGrades"];
+    int totalNumOfCottages = (int)ViewData["TotalNumOfCottages"];
+    int index = 0;
+}
+<h4>Izveštaj poslovanja za svaku od vikendica</h4>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Naziv vikendice
+            </th>
+            <th>
+                Prosečna ocena
+            </th>
+            <th>
+                Ukupna zarada
+            </th>
+            <th>
+                Ukupan broj rezervacija
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @for(int i = 0; i<totalNumOfCottages; i++)
+        {
+        <tr>
+            <td>
+                @cottageNames[index]
+            </td>
+            <td>
+                @averageGrades[index]
+            </td>
+            <td>
+                @cottageIncomes[index]
+            </td>
+            <td>
+                @cottageNumOfReservations[index]
+            </td>
+
+            @{
+                index++;
+            }
+        </tr>
+        }
+        </tbody>
+</table>

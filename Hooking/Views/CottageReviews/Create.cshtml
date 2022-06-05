@@ -1,0 +1,67 @@
+﻿@model Hooking.Models.CottageReview
+
+@{
+    ViewData["Title"] = "Create";
+    Cottage ctg = (Cottage)ViewData["Cottage"];
+    UserDetails ctgOwner = (UserDetails)ViewData["CottageOwner"];
+}
+
+<h4>Revizija za vikendicu i vlasnika vikendice</h4>
+
+<hr />
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            Naziv vikendice
+        </dt>
+        <dd class="col-sm-10">
+            @ctg.Name
+        </dd>
+        <dt class="col-sm-2">
+            Ime vlasnika
+        </dt>
+        <dd class="col-sm-10">
+            @ctgOwner.FirstName
+        </dd>
+        <dt class="col-sm-2">
+            Prezime vlasnika
+        </dt>
+        <dd class="col-sm-10">
+            @ctgOwner.LastName
+        </dd>
+    </dl>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+
+            <div class="form-group">
+                <label asp-for="Review" class="control-label"></label>
+                <input asp-for="Review" class="form-control" />
+                <span asp-validation-for="Review" class="text-danger"></span>
+            </div>
+
+            <select class="form-control" asp-for="Grade" asp-validation-for="Grade" style="margin-bottom:15px;">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+            </select>
+
+            <div class="form-group">
+                <input type="submit" value="Oceni" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a href='javascript:history.go(-1)'>Nazad</a>
+
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,41 @@
+﻿@model IEnumerable<Hooking.Models.CottageAppeal>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+          
+            <th>
+                @Html.DisplayNameFor(model => model.AppealContent)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserEmail)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+          
+            <td>
+                @Html.DisplayFor(modelItem => item.AppealContent)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserEmail)
+            </td>
+            <td>
+                <a asp-controller="CottageAppeals" asp-action="AnswerAppeal" asp-route-id="@item.Id">Odgovori</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

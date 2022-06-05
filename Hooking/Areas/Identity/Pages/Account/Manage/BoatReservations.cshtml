@@ -1,0 +1,70 @@
+﻿@page
+@model Hooking.Areas.Identity.Pages.Account.Manage.BoatReservationsModel
+@{
+    ViewData["Title"] = "Rezervacije";
+    ViewData["ActivePage"] = ManageNavPages.BoatReservations;
+}
+@{
+    List<string> boatNames = (List<string>)ViewData["BoatNames"];
+    var index = 0;
+}
+<h4>Rezervacije</h4>
+<a href="@Url.Action("BoatsForReservation", "Boats")">Napravi novu rezervaciju</a>
+<table class="table">
+    <thead>
+        <tr>
+
+            <th>
+                Naziv vikendice
+            </th>
+            <th>
+                Od
+            </th>
+            <th>
+                Do
+            </th>
+            <th>
+                Cena
+            </th>
+            <th>
+                Broj osoba
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.boatReservations)
+        {
+            <tr>
+                <th>
+                    @boatNames[index]
+                </th>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EndDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PersonCount)
+                </td>
+                <td>
+
+                    <a href="@Url.Action("Details", "BoatReservations", new { Id = @item.Id })">Prikaži više</a>
+                    <a href="@Url.Action("Delete", "BoatReservations", new { Id = @item.Id })">Otkaži rezervaciju</a>
+                </td>
+                @{
+                    index++;
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
+

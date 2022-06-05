@@ -1,0 +1,75 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UserSecretsId>aspnet-Hooking-77613633-AAF7-4145-A5D5-40EAC65701C5</UserSecretsId>
+	<GenerateProgramFile>false</GenerateProgramFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Data\Migrations\20211105194554_CottageClasses.cs" />
+    <Compile Remove="Data\Migrations\20211105194554_CottageClasses.Designer.cs" />
+    <Compile Remove="Data\Migrations\20211125161630_houseRules.cs" />
+    <Compile Remove="Data\Migrations\20211125161630_houseRules.Designer.cs" />
+    <Compile Remove="Data\Migrations\20211125162744_houseRules1.cs" />
+    <Compile Remove="Data\Migrations\20211125162744_houseRules1.Designer.cs" />
+    <Compile Remove="Data\Migrations\20211201082417_cottageImages.cs" />
+    <Compile Remove="Data\Migrations\20211201082417_cottageImages.Designer.cs" />
+    <Compile Remove="Data\Migrations\20211210150709_adveturePriceAdded.cs" />
+    <Compile Remove="Data\Migrations\20211210150709_adveturePriceAdded.Designer.cs" />
+    <Compile Remove="Data\Migrations\20211210151116_adventureUpdate.cs" />
+    <Compile Remove="Data\Migrations\20211210151116_adventureUpdate.Designer.cs" />
+    <Compile Remove="Data\Migrations\20211210151407_updateAdventure.cs" />
+    <Compile Remove="Data\Migrations\20211210151407_updateAdventure.Designer.cs" />
+    <Compile Remove="Data\Migrations\20211210151846_adventureUpdate.cs" />
+    <Compile Remove="Data\Migrations\20211210151846_adventureUpdate.Designer.cs" />
+    <Compile Remove="Data\Migrations\20211210152513_updateAdv.cs" />
+    <Compile Remove="Data\Migrations\20211210152513_updateAdv.Designer.cs" />
+    <Compile Remove="Data\Migrations\20211210161224_changes.cs" />
+    <Compile Remove="Data\Migrations\20211210161224_changes.Designer.cs" />
+    <Compile Remove="Data\Migrations\20220110202108_AddedEmailToAppeals.cs" />
+    <Compile Remove="Data\Migrations\20220110202108_AddedEmailToAppeals.Designer.cs" />
+    <Compile Remove="Data\Migrations\20220110203308_addedFieldsToSpecialOffer.cs" />
+    <Compile Remove="Data\Migrations\20220110203308_addedFieldsToSpecialOffer.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Azure.Storage.Blobs" Version="12.3.0" />
+    <PackageReference Include="Azure.Storage.Files.Shares" Version="12.1.0" />
+    <PackageReference Include="Azure.Storage.Queues" Version="12.2.0" />
+    <PackageReference Include="DotNetSeleniumExtras.WaitHelpers" Version="3.11.0" />
+    <PackageReference Include="GoogleMaps.LocationServices" Version="1.2.0.5" />
+    <PackageReference Include="jQuery.Fullcalendar" Version="3.9.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.19" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.20" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.20" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.21" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Language" Version="3.1.21" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.25" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.25" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.25">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Azure" Version="1.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="6.0.1" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.0.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="2.2.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
+    <PackageReference Include="Nito.AsyncEx" Version="3.0.1" />
+    <PackageReference Include="NUnit" Version="3.13.1" />
+    <PackageReference Include="NUnit.Console" Version="3.13.2" />
+    <PackageReference Include="NUnit.ConsoleRunner" Version="3.13.2" />
+    <PackageReference Include="NUnit.Extension.NUnitProjectLoader" Version="3.7.1" />
+    <PackageReference Include="NUnit3TestAdapter" Version="4.2.0" />
+    <PackageReference Include="OpenQA.Selenium.Winium" Version="1.0.0.4" />
+    <PackageReference Include="Selenium.Chrome.WebDriver" Version="85.0.0" />
+    <PackageReference Include="Selenium.WebDriver" Version="4.1.0" />
+    <PackageReference Include="System.Web.Http.Common" Version="4.0.20126.16343" />
+    <PackageReference Include="WebDriverManager" Version="2.12.3" />
+    <PackageReference Include="WindowsAzure.Storage" Version="9.3.3" />
+  </ItemGroup>
+
+</Project>

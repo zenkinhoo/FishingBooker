@@ -1,0 +1,54 @@
+﻿@model Hooking.Models.BoatOwner
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Moj profil</h1>
+
+<div>
+    <h4>BoatOwner</h4>
+    <hr />
+    <a asp-action="ShowMyBoats" asp-controller="Boats">Prikaži moje brodove</a>
+    <dl class="row">
+        <dt class="col-sm-2" hidden>
+            @Html.DisplayNameFor(model => model.UserDetailsId)
+        </dt>
+        <dd class="col-sm-10" hidden>
+            @Html.DisplayFor(model => model.UserDetailsId)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.AverageGrade)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.AverageGrade)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.GradeCount)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.GradeCount)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.IsCaptain)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.IsCaptain)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.IsFirstOfficer)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.IsFirstOfficer)
+        </dd>
+        <dt class="col-sm-2" hidden>
+            @Html.DisplayNameFor(model => model.RowVersion)
+        </dt>
+        <dd class="col-sm-10" hidden>
+            @Html.DisplayFor(model => model.RowVersion)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Izmeni informacije</a> |
+</div>

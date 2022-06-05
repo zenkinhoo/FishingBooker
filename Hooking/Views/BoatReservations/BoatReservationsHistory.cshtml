@@ -1,0 +1,76 @@
+﻿@model IEnumerable<Hooking.Models.BoatReservation>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.BoatId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserDetailsId)
+            </th>
+            <th>
+                <a asp-action="BoatReservationsHistory" asp-route-sortOrder="@ViewData["StartDate"]">@Html.DisplayNameFor(model => model.StartDate)</a>
+            </th>
+            <th>
+                <a asp-action="BoatReservationsHistory" asp-route-sortOrder="@ViewData["EndDate"]">@Html.DisplayNameFor(model => model.EndDate)</a>
+            </th>
+            <th>
+                <a asp-action="BoatReservationsHistory" asp-route-sortOrder="@ViewData["Price"]">@Html.DisplayNameFor(model => model.Price)</a>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PersonCount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RowVersion)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            @if (DateTime.Compare(item.StartDate, DateTime.Now) < 0)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BoatId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserDetailsId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StartDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EndDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PersonCount)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RowVersion)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+
+        }
+    </tbody>
+</table>

@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Hooking.Models.AdventureReservationReview>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Recenzije rezervacija avantura</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+           
+            <th>
+                @Html.DisplayNameFor(model => model.Review)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DidntShow)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReceivedPenalty)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            @if (!item.IsReviewedByAdmin && item.ReceivedPenalty)
+            {
+                <td>
+                    @Html.DisplayFor(modelItem => item.Review)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DidntShow)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReceivedPenalty)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Revidiraj</a>
+
+                </td>
+            }
+        </tr>
+}
+    </tbody>
+</table>

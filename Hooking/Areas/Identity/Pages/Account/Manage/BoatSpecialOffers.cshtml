@@ -1,0 +1,93 @@
+﻿@page
+@model Hooking.Areas.Identity.Pages.Account.Manage.BoatSpecialOffersModel
+@{
+    ViewData["Title"] = "Moje specijalne ponude";
+    ViewData["ActivePage"] = ManageNavPages.BoatSpecialOffers;
+}
+@{
+    List<string> boatNames = (List<string>)ViewData["BoatNames"];
+    var index = 0;
+}
+<h4>Moje aktivne specijalne ponude</h4>
+
+<p>
+    <a href="@Url.Action("BoatsForSpecialOffer", "Boats")">Dodaj novu specijalnu ponudu</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Naziv vikendice
+            </th>
+            <th>
+                Od
+            </th>
+            <th>
+                Do
+            </th>
+            <th>
+                Važi od
+            </th>
+            <th>
+                Važi do
+            </th>
+            <th>
+                Cena
+            </th>
+            <th>
+                Maksimalan broj gostiju
+            </th>
+            <th>
+                Rezervisano
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.boatSpecialOffers)
+        {
+        <tr>
+            <td>
+                @boatNames[index]
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ValidFrom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ValidTo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaxPersonCount)
+            </td>
+            <td>
+                @if (item.IsReserved)
+                {
+                    @Html.Raw("Da");
+                }
+                else
+                {
+                    @Html.Raw("Ne");
+                }
+            </td>
+            <td>
+                <a href="@Url.Action("Edit", "BoatSpecialOffers", new { Id = @item.Id })">Izmeni</a> |
+                <a href="@Url.Action("Details", "BoatSpecialOffers", new { Id = @item.Id })">Prikaži još</a> |
+                <a href="@Url.Action("Delete", "BoatSpecialOffers", new { Id = @item.Id })">Ukloni</a>
+            </td>
+            @{
+                index++;
+            }
+        </tr>
+        }
+    </tbody>
+</table>
+

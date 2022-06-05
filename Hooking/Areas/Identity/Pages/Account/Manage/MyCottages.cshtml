@@ -1,0 +1,85 @@
+﻿@page
+@model Hooking.Areas.Identity.Pages.Account.Manage.MyCottagesModel
+@{
+    ViewData["Title"] = "Moje vikendice";
+    ViewData["ActivePage"] = ManageNavPages.MyCottages;
+}
+<h4>@ViewData["Title"]</h4>
+
+<p>
+    <a href="@Url.Action("Create", "Cottages")">Dodaj novu vikendicu</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Naziv
+            </th>
+            <th>
+                Adresa
+            </th>
+            <th>
+                Grad
+            </th>
+            <th>
+                Država
+            </th>
+            <th>
+                Opis
+            </th>
+            <th>
+                Broj soba
+            </th>
+            <th>
+                Površina
+            </th>
+            <th>
+                Prosečna ocena
+            </th>
+            <th>
+                Broj ocena
+            </th>
+           
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.myCottages)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.City)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Country)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RoomCount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Area)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AverageGrade)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GradeCount)
+                </td>
+                
+                <td>
+                    <a href="@Url.Action("MyCottage", "Cottages", new { Id = @item.Id })">Prikaži još</a> |
+                    <a href="@Url.Action("Delete", "Cottages", new { Id = @item.Id })">Ukloni iz ponude</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

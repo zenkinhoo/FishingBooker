@@ -1,0 +1,20 @@
+﻿@model Hooking.Models.BoatFavorites
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+
+<h3>Jeste li sigurni da zelite da otkazete pretplatu?</h3>
+<div>
+    <hr />
+    <dl class="row">
+       
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Otkazi" class="btn btn-danger" /> |
+        <a href='javascript:history.go(-1)'>Nazad</a>
+    </form>
+</div>
