@@ -1,12 +1,8 @@
-Hooking aplikacija za bukiranje vikendica, brodova i avantura!
+- Academic full stack web project
+- Web application for booking cottages, boats and fishing classes
+- ASP.NET, Entity Framework, NuGet Packages, MSSQL Database
 
-http://zenkinhoo-001-site1.htempurl.com/
 
-Korisceni su ASP.NET,  MSSQL baza podataka, NuGet paketi, smarterasp.net za deployment aplikacije
-Uloge:
-Obican korisnik: zenky1337@gmail.com Lazar1231.
-Obican korisnik: korisnikkorisnikovic@gmail.com Lazar1231.
-Administrator: lazarmitrovic14@gmail.com Lazar1231.
 
 
 
